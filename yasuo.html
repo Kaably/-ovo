@@ -52,5 +52,12 @@
 
     <a href="index.html" class="back-btn">返回主页</a>
   </div>
-</body>
+<!-- 背景音乐播放器+控制：直接粘贴，不改内容 -->
+<audio id="bgmPlayer" loop preload="auto" style="display: none;"><source src="music/bgm.mp3" type="audio/mpeg"></audio>
+<div class="music-control" id="musicControlBtn" style="position:fixed;bottom:20px;left:20px;width:60px;height:60px;border-radius:50%;background:#000;color:white;display:flex;align-items:center;justify-content:center;font-size:32px;cursor:pointer;z-index:9999;">♫</div>
+<script>
+const bgm=document.getElementById('bgmPlayer'),musicBtn=document.getElementById('musicControlBtn');let isPlaying=localStorage.getItem('bgmPlaying')==='true'||false;
+window.onload=()=>{const t=localStorage.getItem('bgmCurrentTime')||0;bgm.currentTime=t;if(isPlaying){bgm.muted=false;bgm.play().catch(()=>{document.body.addEventListener('click',()=>{bgm.muted=false;bgm.play();},{once:true});});musicBtn.innerHTML="♫";}else{musicBtn.innerHTML="⏸";}bgm.addEventListener('timeupdate',()=>{localStorage.setItem('bgmCurrentTime',bgm.currentTime);});};
+musicBtn.addEventListener('click',()=>{if(isPlaying){bgm.pause();musicBtn.innerHTML="⏸";}else{bgm.muted=false;bgm.play();musicBtn.innerHTML="♫";}isPlaying=!isPlaying;localStorage.setItem('bgmPlaying',isPlaying);});
+</script></body>
 </html>
