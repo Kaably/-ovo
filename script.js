@@ -37,4 +37,21 @@ document.getElementById('searchInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') {
     searchHero();
   }
+
 });
+// 弹窗逻辑
+function openModal() {
+  document.getElementById('imageModal').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('imageModal').style.display = 'none';
+}
+
+// 点击弹窗外部关闭
+window.onclick = function(event) {
+  const modal = document.getElementById('imageModal');
+  if (event.target === modal) {
+    closeModal();
+  }
+}
