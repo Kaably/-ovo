@@ -121,47 +121,63 @@
         <div class="hot-hero">
             <h3>热门英雄攻略</h3>
             <div class="hero-list">
+                <!-- 补全所有原有英雄，和最初列表一致 -->
                 <div class="hero-item" onclick="window.location.href='yasuo.html'">
                     <img src="images/yasuo.jpg" alt="亚索">
                     <span>亚索</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='gailun.html'">
+                    <img src="images/gailun.jpg" alt="盖伦">
+                    <span>盖伦</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='yongen.html'">
+                    <img src="images/yongen.jpg" alt="永恩">
+                    <span>永恩</span>
                 </div>
                 <div class="hero-item" onclick="window.location.href='wuqi.html'">
                     <img src="images/wuqi.jpg" alt="武器">
                     <span>武器</span>
                 </div>
-                <div class="hero-item" onclick="window.location.href='yongen.html'">
-                    <img src="images/yongen.jpg" alt="永恩">
-                    <span>永恩</span>
+                <div class="hero-item" onclick="window.location.href='houzi.html'">
+                    <img src="images/houzi.jpg" alt="猴子">
+                    <span>猴子</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='chuanzhang.html'">
+                    <img src="images/chuanzhang.jpg" alt="船长">
+                    <span>船长</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='anni.html'">
+                    <img src="images/anni.jpg" alt="安妮">
+                    <span>安妮</span>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 模糊搜索功能
+        // 模糊搜索功能（对应所有英雄，和最初一致）
         function searchHero() {
             const input = document.getElementById('searchInput').value.trim().toLowerCase();
             if (!input) {
                 alert('请输入英雄名称搜索！');
                 return;
             }
-            const heroMap = {
-                '亚索': 'yasuo.html',
-                '武器': 'wuqi.html',
-                '永恩': 'yongen.html',
-                '盖伦': 'gailun.html',
-                '猴子': 'houzi.html'
-            };
-            const matchHero = Object.keys(heroMap).find(hero => hero.includes(input));
-            if (matchHero) {
-                window.location.href = heroMap[matchHero];
-            } else {
-                alert('暂未收录该英雄攻略！');
-            }
+            const heroData = [
+                { names: ['亚索', '疾风剑豪'], page: 'yasuo.html' },
+                { names: ['盖伦', '德玛西亚之力'], page: 'gailun.html' },
+                { names: ['永恩', '封魔剑魂'], page: 'yongen.html' },
+                { names: ['武器', '武器大师', '贾克斯'], page: 'wuqi.html' },
+                { names: ['猴子', '齐天大圣', '孙悟空'], page: 'houzi.html' },
+                { names: ['船长', '海洋之灾', '普朗克'], page: 'chuanzhang.html' },
+                { names: ['安妮', '黑暗之女'], page: 'anni.html' }
+            ];
+            const results = heroData.filter(hero => hero.names.some(name => name.toLowerCase().includes(input)));
+            if (results.length === 1) window.location.href = results[0].page;
+            else if (results.length > 1) alert(`找到多个匹配英雄：${results.map(hero => hero.names[0]).join('、')}\n请输入更精确的名称`);
+            else alert('暂未收录该英雄攻略哦~');
         }
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') searchHero();
-        });
+        // 回车键触发搜索
+        document.getElementById('searchInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') searchHero(); });
     </script>
 </body>
 </html>
