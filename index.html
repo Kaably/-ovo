@@ -5,97 +5,232 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>大乱斗海克斯助手 - 小帅出品</title>
   <style>
-    /* 原有样式不变，新增引导提示样式 */
-    .music-tip {
-      position: fixed;
-      bottom: 120px;
-      left: 40px;
-      background: rgba(0,0,0,0.8);
-      color: white;
-      padding: 8px 16px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 微软雅黑, sans-serif;
+    }
+    body {
+      background: #fdf9f6;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
       border-radius: 20px;
-      font-size: 14px;
-      z-index: 998;
-      display: none;
-      transition: opacity 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+    .title-box {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #ff4500;
+    }
+    h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #888;
+      font-style: italic;
+    }
+    .search-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 50px;
+    }
+    .search-box {
+      display: flex;
+      gap: 15px;
+    }
+    #searchInput {
+      flex: 1;
+      padding: 15px 20px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      font-size: 16px;
+    }
+    .search-box button {
+      padding: 0 25px;
+      background: #ff4500;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .hot-hero {
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    .hot-hero h3 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 30px;
+      padding-left: 10px;
+      border-left: 4px solid #ff4500;
+    }
+    .hero-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 30px;
+    }
+    .hero-item {
+      text-align: center;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 15px;
+      background: #fafafa;
+      /* 修复文字方向：确保从左到右 */
+      direction: ltr;
+      writing-mode: horizontal-tb;
+    }
+    .hero-item img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 3px solid #ff4500;
+      /* 修复图片不加载：确保可见 */
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+    .hero-item span {
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+      /* 确保文字正常显示 */
+      transform: none;
+    }
+    .float-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      padding: 14px 22px;
+      background: #ff4500;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .music-float {
+      position: fixed;
+      bottom: 40px;
+      left: 40px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 28px;
     }
   </style>
 </head>
 <body>
-  <!-- 原有页面结构不变 -->
+  <div class="container">
+    <div class="title-box">
+      <h1>⚔️ 大乱斗海克斯助手 ⚔️</h1>
+      <p class="subtitle">小帅出品 必属精品</p>
+    </div>
 
-  <!-- 新增音乐状态提示 -->
-  <div class="music-tip" id="musicTip">点击任意位置即可播放音乐</div>
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
+        <button onclick="searchHero()">搜索</button>
+      </div>
+    </div>
 
-  <audio id="bgMusic" autoplay loop muted preload="auto">
+    <div class="hot-hero">
+      <h3>热门英雄攻略</h3>
+      <div class="hero-list">
+        <div class="hero-item" onclick="window.location.href='yasuo.html'">
+          <img src="images/yasuo.jpg" alt="亚索">
+          <span>亚索</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='gailun.html'">
+          <img src="images/gailun.jpg" alt="盖伦">
+          <span>盖伦</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='yongen.html'">
+          <img src="images/yongen.jpg" alt="永恩">
+          <span>永恩</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='wuqi.html'">
+          <img src="images/wuqi.jpg" alt="武器">
+          <span>武器</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='houzi.html'">
+          <img src="images/houzi.jpg" alt="猴子">
+          <span>猴子</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='chuanzhang.html'">
+          <img src="images/chuanzhang.jpg" alt="船长">
+          <span>船长</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='anni.html'">
+          <img src="images/anni.jpg" alt="安妮">
+          <span>安妮</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="music-float" id="musicFloat">🎵</div>
+  <button class="float-btn" onclick="alert('感谢您的支持！')">赞赏作者</button>
+
+  <audio id="bgMusic" loop muted preload="auto">
     <source src="music/bgm.mp3" type="audio/mpeg">
   
 
   <script>
+    // 音乐控制
     const bgMusic = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicFloat');
-    const musicTip = document.getElementById('musicTip');
-    let isPlaying = true;
-    let retryCount = 0;
-    const maxRetry = 10; // 最多重试10次
+    let isPlaying = false;
 
-    // 核心优化：多次重试取消静音+监听音频加载完成
-    window.onload = function() {
-      bgMusic.volume = 0.5;
-      
-      // 等待音频加载完成后再尝试取消静音
-      bgMusic.addEventListener('canplaythrough', function() {
-        attemptUnmute();
-      });
-
-      // 兜底：如果音频加载慢，直接开始重试
-      setTimeout(attemptUnmute, 500);
-
-      // 显示引导提示
-      musicTip.style.display = 'block';
-    };
-
-    // 多次尝试取消静音（每500ms试一次）
-    function attemptUnmute() {
-      if (retryCount >= maxRetry) return;
-      
-      try {
-        bgMusic.muted = false;
-        // 检查是否真的取消了静音
-        if (!bgMusic.muted) {
-          musicBtn.innerHTML = "🎧";
-          musicTip.style.display = 'none'; // 成功后隐藏提示
-          return;
-        }
-      } catch (err) {
-        console.log(`取消静音失败（第${retryCount+1}次）：`, err);
-      }
-      
-      retryCount++;
-      setTimeout(attemptUnmute, 500);
-    }
-
-    // 点击页面任意位置立即取消静音（兜底方案）
-    document.addEventListener('click', function() {
-      bgMusic.muted = false;
-      bgMusic.play();
-      musicBtn.innerHTML = "🎧";
-      musicTip.style.display = 'none';
-    }, { once: true });
-
-    // 按钮点击切换播放/暂停
+    // 按钮切换播放/暂停
     musicBtn.addEventListener('click', function() {
       if (isPlaying) {
         bgMusic.pause();
         musicBtn.innerHTML = "🎵";
         isPlaying = false;
       } else {
-        bgMusic.play();
+        bgMusic.volume = 0.5;
         bgMusic.muted = false;
+        bgMusic.play();
         musicBtn.innerHTML = "🎧";
         isPlaying = true;
       }
     });
+
+    // 搜索功能
+    function searchHero() {
+      const input = document.getElementById('searchInput').value.trim();
+      if (!input) {
+        alert('请输入英雄名称！');
+        return;
+      }
+      const heroMap = {
+        "亚索": "yasuo.html", "盖伦": "gailun.html", "永恩": "yongen.html",
+        "猴子": "houzi.html", "船长": "chuanzhang.html", "武器": "wuqi.html", "安妮": "anni.html"
+      };
+      if (heroMap[input]) {
+        window.location.href = heroMap[input];
+      } else {
+        alert('暂未收录该英雄攻略哦～');
+      }
+    }
   </script>
 </body>
 </html>
