@@ -3,60 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>英雄详情 - 大乱斗海克斯助手</title>
-  <link rel="stylesheet" href="style.css">
+  <title>亚索 - 大乱斗海克斯助手</title>
+  <style>
+    /* 整体样式，适配手机+电脑 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 微软雅黑, sans-serif;
+    }
+    body {
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #ff4500;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+    /* 攻略板块样式 */
+    .guide-section {
+      margin: 25px 0;
+    }
+    .guide-section h2 {
+      font-size: 18px;
+      color: #333;
+      border-left: 4px solid #ff4500;
+      padding-left: 10px;
+      margin-bottom: 15px;
+    }
+    .guide-section p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #555;
+      margin: 8px 0;
+    }
+    .guide-section p strong {
+      color: #ff4500;
+      font-weight: bold;
+    }
+    .guide-section ul {
+      margin-left: 20px;
+    }
+    .guide-section li {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #555;
+      margin: 5px 0;
+    }
+    /* 返回按钮 */
+    .back-btn {
+      display: block;
+      width: 120px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background: #ff4500;
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      margin: 30px auto 0;
+    }
+  </style>
 </head>
 <body>
-  <div class="detail-container">
-    <a href="index.html" class="back-btn">← 返回首页</a>
-    <h2 id="heroName">英雄名称</h2>
-    <div class="hero-info">
-      <div class="info-item">
-        <h4>海克斯推荐：</h4>
-        <p id="heroHex"></p>
-      </div>
-      <div class="info-item">
-        <h4>装备推荐：</h4>
-        <p id="heroEquip"></p>
-      </div>
-      <div class="info-item">
-        <h4>玩法备注：</h4>
-        <p id="heroNote"></p>
-      </div>
+  <div class="container">
+    <h1>疾风剑豪 - 亚索</h1>
+    <p class="subtitle">小帅出品必属精品</p>
+
+    <!-- 海克斯优先级 -->
+    <div class="guide-section">
+      <h2>海克斯优先级</h2>
+      <p><strong>白色：</strong>暗影疾奔（提升 E 穿梭效率）&gt; 渴血（续航）&gt; 灵巧（机动性）</p>
+      <p><strong>金色：</strong>易损（特效伤害翻倍）&gt; 会心治疗（吸血联动）&gt; 升级无尽（暴击上限提升）&gt; 双刀流（A 一下叠两层被动）</p>
+      <p><strong>彩色：</strong>吸血类（团战续航）&gt; 珠光护手（AP 流暴击）&gt; 终极刷新（大招循环）&gt; 利刃华尔兹（团战进场复活收割）</p>
     </div>
+
+    <!-- 出装分支 -->
+    <div class="guide-section">
+      <h2>出装分支</h2>
+      <p><strong>AD 暴击流：</strong>适合常规阵容，海妖提供持续伤害，盾书保障团战容错</p>
+      <p><strong>AP 流：</strong>选到 <strong>狂妄 (毁坏仪式)</strong> 时质变，技能频繁触发护盾，E 技能滑起来几乎不死</p>
+      <p><strong>AD出装：</strong>海妖 → 无尽 → 幻影 → 凡性 → 饮血→攻速鞋</p>
+      <p><strong>AP出装：</strong>狂妄 → 影焰 → 帽子 → 法穿棒 → 中娅→法穿鞋</p>
+    </div>
+
+    <!-- 核心玩法要点 -->
+    <div class="guide-section">
+      <h2>核心玩法要点</h2>
+      <ul>
+        <li>主 E 副 Q，有大点大，前期 1 级 W 足矣</li>
+        <li>打脆皮 EQAQ 一套带走，打肉靠大招真伤持续输出</li>
+        <li>AP 流需狂徒豪气 / 大地苏醒等移速海克斯配合，无限 E 触发护盾</li>
+        <li>团战先 E 小兵 / 前排叠满被动再进场，W 挡关键技能（如泽拉斯 Q、金克丝 R）</li>
+      </ul>
+    </div>
+
+    <!-- 返回主页按钮 -->
+    <a href="index.html" class="back-btn">返回主页</a>
   </div>
-
-  <script>
-    // 获取URL中的英雄名称
-    const urlParams = new URLSearchParams(window.location.search);
-    const heroName = urlParams.get('hero');
-    const heroData = {
-      "亚索": {
-        hex: "狂风绝息、致命节奏、嗜血猎手",
-        equip: "无尽+电刀+饮血剑+水银",
-        note: "优先暴击攻速，避免纯肉"
-      },
-      "奶妈": {
-        hex: "生命源泉、奥术彗星、法力流系带",
-        equip: "圣杯+香炉+救赎+流水法杖",
-        note: "偏辅助续航，少出输出装"
-      },
-      "盖伦": {
-        hex: "坚韧不屈、复苏之风、爆破专家",
-        equip: "黑切+日炎+反甲+狂徒",
-        note: "主坦抗伤，优先堆血量和护甲"
-      }
-    };
-
-    // 显示英雄信息
-    if (heroData[heroName]) {
-      document.getElementById('heroName').innerText = heroName;
-      document.getElementById('heroHex').innerText = heroData[heroName].hex;
-      document.getElementById('heroEquip').innerText = heroData[heroName].equip;
-      document.getElementById('heroNote').innerText = heroData[heroName].note;
-    } else {
-      document.getElementById('heroName').innerText = "暂无该英雄攻略";
-    }
-  </script>
 </body>
 </html>
