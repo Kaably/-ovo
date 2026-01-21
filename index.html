@@ -102,24 +102,6 @@
             color: #333;
             font-weight: bold;
         }
-        /* 音乐悬浮图标样式 */
-        .music-float {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #ff4500;
-            color: #fff;
-            text-align: center;
-            line-height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255, 69, 0, 0.4);
-            z-index: 9999;
-            user-select: none;
-        }
     </style>
 </head>
 <body>
@@ -155,14 +137,6 @@
         </div>
     </div>
 
-    <!-- 音乐悬浮图标 -->
-    <div class="music-float" id="musicBtn">▶️</div>
-    <!-- 音频标签（隐藏） -->
-    <audio id="bgMusic" loop>
-        <!-- 替换为你的背景音乐文件路径（如music/bgm.mp3） -->
-        <source src="music/bgm.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
         // 模糊搜索功能
         function searchHero() {
@@ -187,51 +161,6 @@
         }
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') searchHero();
-        });
-
-        // 全局背景音乐逻辑
-        const musicBtn = document.getElementById('musicBtn');
-        const bgMusic = document.getElementById('bgMusic');
-        
-        // 初始化音频状态（从localStorage恢复）
-        window.onload = function() {
-            // 恢复播放进度
-            const savedTime = localStorage.getItem('bgMusicTime');
-            if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
-            
-            // 恢复播放状态（先静音自动播放，兼容浏览器策略）
-            bgMusic.muted = true; // 静音自动播放
-            bgMusic.play().then(() => {
-                musicBtn.innerText = '⏸️';
-                localStorage.setItem('bgMusicPaused', 'false');
-            }).catch(err => {
-                musicBtn.innerText = '▶️';
-                localStorage.setItem('bgMusicPaused', 'true');
-            });
-
-            // 同步按钮状态
-            const isPaused = localStorage.getItem('bgMusicPaused') === 'true';
-            musicBtn.innerText = isPaused ? '▶️' : '⏸️';
-        };
-
-        // 监听页面离开，保存播放状态/进度
-        window.onbeforeunload = function() {
-            localStorage.setItem('bgMusicTime', bgMusic.currentTime);
-            localStorage.setItem('bgMusicPaused', bgMusic.paused);
-        };
-
-        // 播放/暂停切换
-        musicBtn.addEventListener('click', function() {
-            if (bgMusic.paused) {
-                bgMusic.muted = false; // 解锁声音
-                bgMusic.play();
-                musicBtn.innerText = '⏸️';
-                localStorage.setItem('bgMusicPaused', 'false');
-            } else {
-                bgMusic.pause();
-                musicBtn.innerText = '▶️';
-                localStorage.setItem('bgMusicPaused', 'true');
-            }
         });
     </script>
 </body>
