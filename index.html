@@ -24,7 +24,7 @@
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    /* 标题区域 */
+    /* 标题区域（橙色，不变） */
     .title-box {
       text-align: center;
       margin-bottom: 30px;
@@ -104,14 +104,15 @@
       margin-bottom: 8px;
       border: 2px solid #ff450030;
     }
-    /* 英雄名字：炫酷字体（橙色+加粗+发光阴影） */
+    /* 英雄名字：新风格（深蓝色+白色描边+哑光阴影，和标题区分） */
     .hero-item span {
       font-size: 16px;
-      color: #ff4500;
+      color: #2E86AB; /* 深海蓝，和橙色标题区分 */
       font-weight: bold;
-      text-shadow: 0 0 6px #ff4500; /* 发光炫酷效果 */
-      display: block; /* 强制横排，修复竖排问题 */
-      transform: rotate(0); /* 取消旋转 */
+      text-shadow: 1px 1px 0 #fff, 2px 2px 3px #0003; /* 白色描边+哑光阴影，更高级 */
+      -webkit-text-stroke: 0.5px #fff; /* 白色细描边，炫酷不刺眼 */
+      display: block;
+      transform: rotate(0);
     }
     /* 右下角赞赏按钮 */
     .float-btn {
