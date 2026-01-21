@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 微软雅黑, sans-serif;
+      font-family: "微软雅黑", sans-serif;
     }
     body {
       background: #fdf9f6;
@@ -116,7 +116,7 @@
       border-radius: 50px;
       cursor: pointer;
       font-weight: bold;
-      z-index: 9998; /* 比音乐图标低，不遮挡 */
+      z-index: 9998;
     }
     .modal {
       display: none;
@@ -162,28 +162,6 @@
       display: none;
       opacity: 0;
       transition: opacity 0.3s ease;
-    }
-    /* 🎵 左下角音乐控制 | 黑色底色 | 帅气♫logo | 核心修改 */
-    .music-control {
-      position: fixed;
-      bottom: 20px;
-      left: 20px; /* 移到左下角 */
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #000; /* 纯黑色底色 */
-      color: white; /* 白色logo */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px; /* 放大logo更帅气 */
-      cursor: pointer;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.5);
-      z-index: 9999; /* 最上层，不被遮挡 */
-      transition: transform 0.2s ease;
-    }
-    .music-control:hover {
-      transform: scale(1.1); /* 悬浮放大 */
     }
   </style>
 </head>
@@ -247,82 +225,7 @@
 
   <div class="toast" id="thankToast">感谢支持 会持续更新✨</div>
 
-  <!-- 背景音乐播放器 -->
-  <audio id="bgmPlayer" loop preload="auto" style="display: none;">
-    <source src="music/bgm.mp3" type="audio/mpeg">
-  
-
-  <!-- 左下角黑色音乐控制按钮（帅气♫logo） -->
-  <div class="music-control" id="musicControlBtn">♫</div>
-
   <script>
-    // 1. 赞赏弹窗+感谢提示
+    // 赞赏弹窗+感谢提示
     const modal = document.getElementById('imageModal');
-    const thankToast = document.getElementById('thankToast');
-    function openModal() { modal.style.display = 'block'; }
-    function closeModal() {
-      modal.style.display = 'none';
-      thankToast.style.display = 'block';
-      thankToast.style.opacity = '1';
-      setTimeout(() => {
-        thankToast.style.opacity = '0';
-        setTimeout(() => thankToast.style.display = 'none', 300);
-      }, 3000);
-    }
-    window.onclick = (e) => { if (e.target === modal) closeModal(); };
-
-    // 2. 增强模糊搜索（永→永恩、猴→猴子）
-    function searchHero() {
-      const input = document.getElementById('searchInput').value.trim().toLowerCase();
-      if (!input) { alert('请输入英雄名称搜索（如亚索、齐天大圣）'); return; }
-      const heroData = [
-        { names: ['亚索', '疾风剑豪'], page: 'yasuo.html' },
-        { names: ['盖伦', '德玛西亚之力'], page: 'gailun.html' },
-        { names: ['永恩', '封魔剑魂'], page: 'yongen.html' },
-        { names: ['武器', '武器大师', '贾克斯'], page: 'wuqi.html' },
-        { names: ['猴子', '齐天大圣', '孙悟空'], page: 'houzi.html' },
-        { names: ['船长', '海洋之灾', '普朗克'], page: 'chuanzhang.html' },
-        { names: ['安妮', '黑暗之女'], page: 'anni.html' }
-      ];
-      const results = heroData.filter(hero => hero.names.some(name => name.toLowerCase().includes(input)));
-      if (results.length === 1) window.location.href = results[0].page;
-      else if (results.length > 1) alert(`找到多个匹配英雄：${results.map(hero => hero.names[0]).join('、')}\n请输入更精确的名称`);
-      else alert('暂未收录该英雄攻略哦~');
-    }
-    document.getElementById('searchInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') searchHero(); });
-
-    // 3. 背景音乐控制（本地存储保存状态，跳转不中断核心）
-    const bgm = document.getElementById('bgmPlayer');
-    const musicBtn = document.getElementById('musicControlBtn');
-    let isPlaying = localStorage.getItem('bgmPlaying') === 'true' || false;
-
-    // 页面加载恢复音乐状态+进度
-    window.onload = function() {
-      const savedTime = localStorage.getItem('bgmCurrentTime') || 0;
-      bgm.currentTime = savedTime; // 恢复上次播放位置
-      // 自动播放（解决浏览器限制）
-      if (isPlaying) {
-        bgm.muted = false;
-        bgm.play().catch(() => { document.body.addEventListener('click', () => { bgm.muted = false; bgm.play(); }, { once: true }); });
-        musicBtn.innerHTML = "♫";
-      } else { musicBtn.innerHTML = "⏸"; }
-      // 实时保存播放进度
-      bgm.addEventListener('timeupdate', () => { localStorage.setItem('bgmCurrentTime', bgm.currentTime); });
-    };
-
-    // 点击切换播放/暂停（logo同步变化：♫=播放，⏸=暂停）
-    musicBtn.addEventListener('click', function() {
-      if (isPlaying) {
-        bgm.pause();
-        musicBtn.innerHTML = "⏸"; // 暂停显示停止符
-      } else {
-        bgm.muted = false;
-        bgm.play();
-        musicBtn.innerHTML = "♫"; // 播放显示音乐符
-      }
-      isPlaying = !isPlaying;
-      localStorage.setItem('bgmPlaying', isPlaying); // 保存播放状态
-    });
-  </script>
-</body>
-</html>
+    const thank
