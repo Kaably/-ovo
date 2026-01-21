@@ -28,12 +28,15 @@
       box-shadow: 0 8px 30px rgba(255, 69, 0, 0.08), 0 2px 10px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(255, 69, 0, 0.1);
     }
-    /* 标题区域：渐变文字+装饰图标+层次感 */
+    /* 标题区域：新增音乐按钮布局 */
     .title-box {
       text-align: center;
       margin-bottom: 40px;
       position: relative;
       padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .title-box::after {
       content: "";
@@ -45,6 +48,34 @@
       height: 4px;
       background: linear-gradient(90deg, #ff4500, #ff9500);
       border-radius: 2px;
+    }
+    /* 音乐控制按钮：样式和页面统一 */
+    .music-control {
+      position: absolute;
+      top: 0;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .music-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #ff4500, #ff6347);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(255, 69, 0, 0.2);
+    }
+    .music-btn:hover {
+      background: linear-gradient(90deg, #ff3300, #ff4500);
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(255, 69, 0, 0.3);
     }
     h1 {
       font-size: 36px;
@@ -288,15 +319,35 @@
       .search-container {
         max-width: 400px;
       }
+      .music-control {
+        right: 10px;
+      }
+      .music-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="title-box">
+      <!-- 音乐控制按钮 -->
+      <div class="music-control">
+        <button id="musicBtn" class="music-btn">▶️</button>
+      </div>
       <h1><i>⚔️</i>大乱斗海克斯助手<i>⚔️</i></h1>
       <p class="subtitle">小帅出品 必属精品</p>
     </div>
+
+    <!-- 隐藏的音频元素：循环播放+预加载 -->
+    <audio id="bgMusic" loop preload="auto">
+      <!-- 替换成你的背景音乐路径，建议用MP3格式，支持多格式兼容 -->
+      <source src="music/bgm.mp3" type="audio/mpeg">
+      <source src="music/bgm.ogg" type="audio/ogg">
+      您的浏览器不支持音频播放
+    </audio>
 
     <!-- 搜索区域（保留模糊+别名功能） -->
     <div class="search-container">
@@ -354,8 +405,39 @@
     </div>
   </div>
 
-  <!-- 原有JS功能：模糊搜索+别名跳转+弹窗（完全保留） -->
   <script>
+    // ===================== 背景音乐控制逻辑 =====================
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = false; // 初始未播放（解决自动播放限制）
+
+    // 按钮点击切换播放/暂停
+    musicBtn.addEventListener('click', toggleMusic);
+
+    // 解决浏览器自动播放限制：用户点击页面任意位置后允许播放
+    document.addEventListener('click', function initMusic() {
+      if (!isPlaying) {
+        bgMusic.load(); // 重新加载音频（确保可播放）
+        document.removeEventListener('click', initMusic); // 只执行一次
+      }
+    }, { once: true });
+
+    // 播放/暂停切换函数
+    function toggleMusic() {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.innerHTML = "▶️"; // 暂停显示播放图标
+      } else {
+        bgMusic.play().catch(err => {
+          console.log("音频播放失败：", err);
+          alert("点击页面任意位置后再尝试播放音乐（浏览器安全限制）");
+        });
+        musicBtn.innerHTML = "⏸️"; // 播放显示暂停图标
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // ===================== 原有搜索+弹窗逻辑 =====================
     const heroData = [
       {name: "亚索", aliases: ["亚索"], keywords: ["亚", "亚索"], url: "yasuo.html"},
       {name: "盖伦", aliases: ["盖伦"], keywords: ["盖", "盖伦"], url: "gailun.html"},
