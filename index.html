@@ -132,7 +132,6 @@
       justify-content: center;
       cursor: pointer;
       font-size: 28px;
-      /* 按钮hover效果 */
       transition: all 0.3s ease;
     }
     .music-float:hover {
@@ -143,13 +142,11 @@
 </head>
 <body>
   <div class="container">
-    <!-- 标题区域 -->
     <div class="title-box">
       <h1>⚔️ 大乱斗海克斯助手 ⚔️</h1>
       <p class="subtitle">小帅出品 必属精品</p>
     </div>
 
-    <!-- 搜索区域 -->
     <div class="search-container">
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
@@ -157,7 +154,6 @@
       </div>
     </div>
 
-    <!-- 英雄列表 -->
     <div class="hot-hero">
       <h3>热门英雄攻略</h3>
       <div class="hero-list">
@@ -193,52 +189,51 @@
     </div>
   </div>
 
-  <!-- 悬浮按钮 -->
-  <div class="music-float" id="musicFloat">🎵</div>
+  <div class="music-float" id="musicFloat">🎧</div>
   <button class="float-btn" onclick="alert('感谢您的支持！')">赞赏作者</button>
 
-  <!-- 音频标签：添加自动播放、循环、静音（绕过部分浏览器限制） -->
-  <audio id="bgMusic" autoplay loop preload="auto">
+  <!-- 核心修改：添加muted（静音）属性，浏览器允许静音自动播放 -->
+  <audio id="bgMusic" autoplay loop muted preload="auto">
     <source src="music/bgm.mp3" type="audio/mpeg">
     您的浏览器不支持音频播放
   
 
   <script>
-    // 音乐控制核心逻辑
     const bgMusic = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicFloat');
-    let isPlaying = true; // 初始状态为播放
+    let isPlaying = true;
 
-    // 页面加载后尝试自动播放（处理浏览器限制）
+    // 页面加载后立即尝试取消静音（实现“打开就播”）
     window.onload = function() {
-      // 强制设置音量，避免静音
-      bgMusic.volume = 0.5;
+      bgMusic.volume = 0.5; // 设置音量
       
-      // 监听自动播放失败事件
+      // 方案1：直接取消静音（大部分浏览器生效）
+      setTimeout(() => {
+        bgMusic.muted = false;
+      }, 100); // 延迟100ms，避开浏览器检测
+
+      // 方案2：监听页面任意交互，确保取消静音（兜底）
+      document.addEventListener('click', function firstClick() {
+        bgMusic.muted = false;
+        document.removeEventListener('click', firstClick); // 只执行一次
+      }, { once: true });
+
+      // 错误处理
       bgMusic.addEventListener('error', function() {
         alert('音乐文件加载失败，请检查music/bgm.mp3路径是否正确');
       });
-
-      // 处理浏览器禁止自动播放的情况
-      bgMusic.play().catch(function(err) {
-        console.log('自动播放失败，需要用户交互:', err);
-        isPlaying = false;
-        musicBtn.innerHTML = "🎶"; // 提示用户点击播放
-        alert('浏览器禁止自动播放音乐，请点击左下角音乐按钮开始播放');
-      });
     };
 
-    // 点击音乐按钮切换播放/暂停
+    // 点击按钮切换播放/暂停
     musicBtn.addEventListener('click', function() {
       if (isPlaying) {
-        // 暂停音乐
         bgMusic.pause();
-        musicBtn.innerHTML = "🎵"; // 暂停图标
+        musicBtn.innerHTML = "🎵";
         isPlaying = false;
       } else {
-        // 播放音乐
         bgMusic.play();
-        musicBtn.innerHTML = "🎧"; // 播放图标
+        bgMusic.muted = false; // 播放时强制取消静音
+        musicBtn.innerHTML = "🎧";
         isPlaying = true;
       }
     });
