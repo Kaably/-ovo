@@ -117,21 +117,6 @@
       cursor: pointer;
       font-weight: bold;
     }
-    .music-float {
-      position: fixed;
-      bottom: 40px;
-      left: 40px;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: #fff;
-      border: 2px solid #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 28px;
-    }
     .modal {
       display: none;
       position: fixed;
@@ -161,6 +146,22 @@
       color: white;
       font-size: 40px;
       cursor: pointer;
+    }
+    /* 感谢提示样式（友好的Toast） */
+    .toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      z-index: 9999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
   </style>
 </head>
@@ -213,9 +214,10 @@
     </div>
   </div>
 
-  <div class="music-float" id="musicFloat">🎵</div>
+  <!-- 仅保留赞赏按钮，移除音乐按钮 -->
   <button class="float-btn" onclick="openModal()">赞赏作者</button>
 
+  <!-- 赞赏弹窗 -->
   <div class="modal" id="imageModal">
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <div class="modal-content">
@@ -223,48 +225,38 @@
     </div>
   </div>
 
-  <!-- 音乐续播核心：所有页面都要加这个音频标签 -->
-  <audio id="bgMusic" loop preload="auto" style="display: none;">
-    <source src="music/bgm.mp3" type="audio/mpeg">
+  <!-- 感谢提示Toast -->
+  <div class="toast" id="thankToast">感谢支持 会持续更新✨</div>
 
   <script>
-    // 1. 音乐续播：页面加载自动续播
-    window.onload = function() {
-      const bgMusic = document.getElementById('bgMusic');
-      bgMusic.volume = 0.5;
-      bgMusic.play(); // 利用浏览器缓存，加载极快
-    };
-
-    // 2. 音乐按钮控制（暂停/播放）
-    const musicBtn = document.getElementById('musicFloat');
-    let isPlaying = true; // 默认播放状态
-
-    musicBtn.addEventListener('click', function() {
-      const bgMusic = document.getElementById('bgMusic');
-      if (isPlaying) {
-        bgMusic.pause();
-        musicBtn.innerHTML = "🎵";
-      } else {
-        bgMusic.volume = 0.5;
-        bgMusic.play();
-        musicBtn.innerHTML = "🎧";
-      }
-      isPlaying = !isPlaying;
-    });
-
-    // 3. 赞赏弹窗控制
+    // 赞赏弹窗控制（新增关闭提示）
     const modal = document.getElementById('imageModal');
+    const thankToast = document.getElementById('thankToast');
+
     function openModal() {
       modal.style.display = 'block';
     }
+
     function closeModal() {
       modal.style.display = 'none';
+      // 显示感谢提示
+      thankToast.style.display = 'block';
+      thankToast.style.opacity = '1';
+      // 3秒后自动隐藏提示
+      setTimeout(() => {
+        thankToast.style.opacity = '0';
+        setTimeout(() => {
+          thankToast.style.display = 'none';
+        }, 300);
+      }, 3000);
     }
+
+    // 点击弹窗外部关闭
     window.onclick = function(e) {
       if (e.target === modal) closeModal();
     }
 
-    // 4. 搜索功能
+    // 搜索功能
     function searchHero() {
       const input = document.getElementById('searchInput').value.trim();
       if (!input) {
