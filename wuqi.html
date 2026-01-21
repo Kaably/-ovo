@@ -1,58 +1,143 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>武器大师 - 武器</title>
-  <style>
-    * {margin:0;padding:0;box-sizing:border-box;font-family:微软雅黑;}
-    body {background:#f5f5f5;padding:20px;}
-    .container {max-width:800px;margin:0 auto;background:white;padding:30px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
-    .hero-img {width:100%;max-width:400px;margin:0 auto 20px;border-radius:8px;display:block;}
-    h1 {text-align:center;color:#ff4500;margin-bottom:10px;}
-    .subtitle {text-align:center;color:#666;font-style:italic;margin-bottom:30px;}
-    .guide-section {margin:25px 0;}
-    .guide-section h2 {font-size:18px;color:#333;border-left:4px solid #ff4500;padding-left:10px;margin-bottom:15px;}
-    .guide-section p {font-size:16px;line-height:1.8;color:#555;margin:8px 0;}
-    .guide-section p strong {color:#ff4500;}
-    .guide-section li {font-size:16px;line-height:1.8;color:#555;margin:5px 0;margin-left:20px;}
-    .back-btn {display:block;width:120px;height:40px;line-height:40px;text-align:center;background:#ff4500;color:white;text-decoration:none;border-radius:20px;margin:30px auto 0;}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武器大师 - 大乱斗海克斯助手</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .title-box {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ff4500;
+        }
+        .title-box h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .title-box p {
+            color: #666;
+            font-size: 16px;
+        }
+        .content {
+            line-height: 1.8;
+            color: #333;
+        }
+        .content h2 {
+            color: #ff4500;
+            margin: 20px 0 10px;
+            font-size: 24px;
+        }
+        .content p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        /* 返回按钮样式 */
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #ff4500;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #e03e00;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <img src="images/wuqi.jpg" alt="武器" class="hero-img">
-    <h1>武器大师 - 武器</h1>
-    <p class="subtitle">小帅出品必属精品</p>
-
-    <!-- 海克斯优先级 -->
-    <div class="guide-section">
-      <h2>海克斯优先级</h2>
-      <p><strong>白色：</strong>残暴之力（cd+穿透）&gt;暗影疾奔（提升机动性）&gt; 渴血（续航）&gt; 灵巧（攻速加成）&gt; 万用瞄准镜（提高风筝）</p>
-      <p><strong>金色：</strong>裁决使（刷新技能）&gt; 升级耀光（强化 Q 技能）&gt;吸血习性（提高续航）&gt; 更万用瞄准镜（提高风筝）&gt; 接二连三/闪电打击（额外伤害）</p>
-      <p><strong>彩色：</strong>双刀流（额外伤害）&gt; 最终形态（强化大招）&gt;秘书冲拳（轻松1v5） &gt; 巨人杀手（高伤害）&gt;战争交响乐（叠伤害）</p>
+    <div class="container">
+        <div class="title-box">
+            <h1>武器大师</h1>
+            <p>大乱斗玩法攻略</p>
+        </div>
+        <div class="content">
+            <h2>核心出装</h2>
+            <p>三相之力、破败王者之刃、死亡之舞</p>
+            
+            <h2>符文推荐</h2>
+            <p>征服者、凯旋、传说：韧性、坚毅不倒</p>
+            
+            <h2>玩法技巧</h2>
+            <p>利用E技能躲避关键技能，Q技能跳敌方后排，团战优先切脆皮，W技能重置普攻打满伤害</p>
+            
+            <a href="index.html" class="back-btn">返回主页</a>
+        </div>
     </div>
 
-    <!-- 出装推荐 -->
-    <div class="guide-section">
-      <h2>出装推荐</h2>
-      <p><strong>正常出装：</strong>三相→死舞→ 焚天→破败→青龙刀→抵抗鞋</p>
-      <p>（高爆发同时不容易死）</p>
-    </div>
+    <!-- 👇 音乐播放器+左下角黑色音乐按钮（无需修改） -->
+    <audio id="bgmPlayer" loop preload="auto" style="display: none;">
+        <source src="music/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-control" id="musicControlBtn" style="position:fixed;bottom:20px;left:20px;width:60px;height:60px;border-radius:50%;background:#000;color:white;display:flex;align-items:center;justify-content:center;font-size:32px;cursor:pointer;z-index:9999;">♫</div>
+    <script>
+        // 音乐控制逻辑（自动恢复播放状态+进度）
+        const bgm = document.getElementById('bgmPlayer'),
+              musicBtn = document.getElementById('musicControlBtn');
+        let isPlaying = localStorage.getItem('bgmPlaying') === 'true' || false;
 
-    <!-- 核心玩法要点 -->
-    <div class="guide-section">
-      <h2>核心玩法要点</h2>
-      <ul>
-        <li>技能加点：主 W 副 Q，有大点大。W 是核心输出，Q 突进，E 格挡，R 双抗提升。</li>
-        <li>基础连招：Q 突进 → A 接 W → E 格挡 → 开 R 输出。</li>
-        <li>团战思路：先 Q 突进后排，W 打输出，E 格挡关键技能，开 R 提升双抗，配合破败 + 科技枪吸血续航。</li>
-        <li>技巧：E 格挡可免疫平 A 与部分技能，团战中看准时机释放；带「雪球」海克斯可提升突进距离，快速接近后排。</li>
-      </ul>
-    </div>
+        window.onload = () => {
+            // 恢复上次播放进度
+            const savedTime = localStorage.getItem('bgmCurrentTime') || 0;
+            bgm.currentTime = savedTime;
+            
+            // 自动播放（解决浏览器限制）
+            if (isPlaying) {
+                bgm.muted = false;
+                bgm.play().catch(() => {
+                    document.body.addEventListener('click', () => {
+                        bgm.muted = false;
+                        bgm.play();
+                    }, { once: true });
+                });
+                musicBtn.innerHTML = "♫";
+            } else {
+                musicBtn.innerHTML = "⏸";
+            }
 
-    <!-- 返回主页按钮 -->
-    <a href="index.html" class="back-btn">返回主页</a>
-  </div>
+            // 实时保存播放进度
+            bgm.addEventListener('timeupdate', () => {
+                localStorage.setItem('bgmCurrentTime', bgm.currentTime);
+            });
+        };
+
+        // 点击切换播放/暂停
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgm.pause();
+                musicBtn.innerHTML = "⏸";
+            } else {
+                bgm.muted = false;
+                bgm.play();
+                musicBtn.innerHTML = "♫";
+            }
+            isPlaying = !isPlaying;
+            localStorage.setItem('bgmPlaying', isPlaying);
+        });
+    </script>
 </body>
 </html>
