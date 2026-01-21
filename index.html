@@ -102,13 +102,11 @@
       margin-bottom: 8px;
       border: 2px solid #ff450030;
     }
-    /* 英雄名字：黑色+红边（核心修改） */
+    /* 英雄名字：放大+去掉描边（核心修改） */
     .hero-item span {
-      font-size: 16px;
-      color: #000; /* 黑色字体 */
-      font-weight: bold;
-      -webkit-text-stroke: 1px #ff0000; /* 红色描边 */
-      text-shadow: 0 0 2px #ff000080; /* 红色微光 */
+      font-size: 18px; /* 放大到18px，比原来大2px */
+      color: #000; /* 纯黑色 */
+      font-weight: bold; /* 保留加粗，去掉描边/阴影 */
       display: block;
       transform: rotate(0);
     }
@@ -176,17 +174,17 @@
     <div class="hot-hero">
       <h3>热门英雄</h3>
       <div class="hero-list">
-        <!-- 亚索（先临时跳转到永恩页，创建yasuo.html后改回） -->
-        <div class="hero-item" onclick="window.location.href='yongen.html'">
+        <!-- 亚索：修复跳转，指向正确的yasuo.html -->
+        <div class="hero-item" onclick="window.location.href='yasuo.html'">
           <img src="images/yasuo.jpg" alt="亚索">
           <span>亚索</span>
         </div>
-        <!-- 盖伦（先临时跳转到永恩页，创建gailun.html后改回） -->
-        <div class="hero-item" onclick="window.location.href='yongen.html'">
+        <!-- 盖伦：修复跳转，指向gailun.html -->
+        <div class="hero-item" onclick="window.location.href='gailun.html'">
           <img src="images/gailun.jpg" alt="盖伦">
           <span>盖伦</span>
         </div>
-        <!-- 永恩 -->
+        <!-- 永恩：跳转正确 -->
         <div class="hero-item" onclick="window.location.href='yongen.html'">
           <img src="images/yongen.jpg" alt="永恩">
           <span>永恩</span>
@@ -205,16 +203,21 @@
   </div>
 
   <script>
-    // 搜索功能（临时统一跳永恩页，创建文件后改）
+    // 搜索功能：修复跳转，对应各自英雄页
     function searchHero() {
       const heroName = document.getElementById('searchInput').value.trim();
-      if (heroName) {
-        window.location.href = 'yongen.html'; // 临时跳转，创建文件后细分
+      if (heroName === '亚索') {
+        window.location.href = 'yasuo.html'; // 跳亚索页
+      } else if (heroName === '盖伦') {
+        window.location.href = 'gailun.html'; // 跳盖伦页
+      } else if (heroName === '永恩') {
+        window.location.href = 'yongen.html'; // 跳永恩页
       } else {
-        alert('请输入英雄名称！');
+        alert('暂未收录该英雄攻略哦～');
       }
     }
 
+    // 弹窗逻辑（无BUG）
     function openModal() {
       document.getElementById('imageModal').style.display = 'block';
     }
