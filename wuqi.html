@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>武器大师 - 大乱斗海克斯助手</title>
+    <title>武器大师 - 贾克斯</title>
     <style>
-        /* 基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -15,77 +14,101 @@
         body {
             background-color: #f5f5f5;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 30px;
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .title-box {
+        .hero-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .hero-title {
+            color: #ff4500;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #999;
+            font-size: 14px;
             text-align: center;
             margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #ff4500;
         }
-        .title-box h1 {
+        .content-title {
+            font-size: 18px;
             color: #333;
-            font-size: 32px;
-            margin-bottom: 10px;
+            margin: 20px 0 12px;
+            padding-left: 8px;
+            border-left: 3px solid #ff4500;
         }
-        .title-box p {
+        .priority-item {
+            margin: 10px 0;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .white-tag {
             color: #666;
-            font-size: 16px;
+            font-weight: 600;
         }
-        .content {
+        .gold-tag {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        .color-tag {
+            color: #ff69b4;
+            font-weight: 600;
+        }
+        .build-content {
             line-height: 1.8;
-            color: #333;
-        }
-        .content h2 {
-            color: #ff4500;
-            margin: 20px 0 10px;
-            font-size: 24px;
-        }
-        .content p {
             font-size: 16px;
-            margin-bottom: 15px;
-        }
-        /* 返回按钮样式 */
-        .back-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #ff4500;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        .back-btn:hover {
-            background-color: #e03e00;
+            color: #333;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="title-box">
-            <h1>武器大师</h1>
-            <p>大乱斗玩法攻略</p>
+        <!-- 替换为你实际的武器大师图片路径 -->
+        <img src="images/wuqi.jpg" alt="武器大师" class="hero-img">
+        <h1 class="hero-title">武器大师 - 贾克斯</h1>
+        <p class="subtitle">小帅出品必属精品</p>
+
+        <h2 class="content-title">海克斯优先级</h2>
+        <p class="priority-item">
+            <span class="white-tag">白色：</span>
+            韧性（减少控制时长）> 吸血（续航）> 护甲（坦度）> 攻速（输出提升）
+        </p>
+        <p class="priority-item">
+            <span class="gold-tag">金色：</span>
+            易损（特效伤害翻倍）> 会心治疗（吸血联动）> 升级三相（属性提升）> 双刀流（普攻收益提升）
+        </p>
+        <p class="priority-item">
+            <span class="color-tag">彩色：</span>
+            珠光护手（暴击）> 终极刷新（大招循环）> 利刃华尔兹（团战收割）> 吸血类海克斯（续航拉满）
+        </p>
+
+        <h2 class="content-title">出装推荐</h2>
+        <div class="build-content">
+            核心出装：三相之力 + 破败王者之刃 + 死亡之舞<br>
+            可选出装：兰顿之兆（抗暴击）、狂徒铠甲（回血）、水银饰带（解控）<br>
+            鞋子：铁板靴（优先）/ 水银鞋（对面控制多）
         </div>
-        <div class="content">
-            <h2>核心出装</h2>
-            <p>三相之力、破败王者之刃、死亡之舞</p>
-            
-            <h2>符文推荐</h2>
-            <p>征服者、凯旋、传说：韧性、坚毅不倒</p>
-            
-            <h2>玩法技巧</h2>
-            <p>利用E技能躲避关键技能，Q技能跳敌方后排，团战优先切脆皮，W技能重置普攻打满伤害</p>
-            
-            <a href="index.html" class="back-btn">返回主页</a>
+
+        <h2 class="content-title">玩法技巧</h2>
+        <div class="build-content">
+            1. E技能躲避敌方关键技能（如大招、控制），反手打满输出<br>
+            2. Q技能优先跳敌方脆皮后排，切死输出再回头处理前排<br>
+            3. W技能重置普攻，连招时注意衔接以最大化伤害
         </div>
     </div>
 </body>
