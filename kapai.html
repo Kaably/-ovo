@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡牌大师 - 崔斯特</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .hero-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .hero-title {
+            color: #ff4500;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .content-title {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0 12px;
+            padding-left: 8px;
+            border-left: 3px solid #ff4500;
+        }
+        .priority-item {
+            margin: 10px 0;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        .white-tag {
+            color: #666;
+            font-weight: 600;
+        }
+        .gold-tag {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        .color-tag {
+            color: #ff69b4;
+            font-weight: 600;
+        }
+        .build-content, .skill-content {
+            line-height: 1.8;
+            font-size: 16px;
+            color: #333;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="images/kapai.jpg" alt="卡牌大师" class="hero-img">
+        <h1 class="hero-title">卡牌大师 - 崔斯特</h1>
+        <p class="subtitle">小帅出品必属精品</p>
+
+        <h2 class="content-title">海克斯优先级</h2>
+        <p class="priority-item">
+            <span class="white-tag">白色：</span>
+            炼狱龙魂>海洋龙魂> 巫师式思考>帽上加帽>家园卫士
+        </p>
+        <p class="priority-item">
+            <span class="gold-tag">金色：</span>
+            老练狙神>面包和黄油>魔法飞弹>有始有终>循环往复> 魔法飞弹
+        </p>
+        <p class="priority-item">
+            <span class="color-tag">彩色：</span>
+            夺金>尤里卡>回归基本功>任务：沃格勒特的巫师帽>巨人杀手>炼狱导管
+        </p>
+
+        <h2 class="content-title">出装推荐</h2>
+        <div class="build-content">
+            消耗出装：火炬→兰德里的折磨→影焰 →帽子 →蜕生 → 法师鞋<br>
+            爆发出装：卢登→巫妖→影焰 →帽子 →专注→ 法师鞋
+        </div>
+
+        <h2 class="content-title">核心玩法要点</h2>
+        <div class="skill-content">
+            <strong>技能加点：</strong>主 Q 副 W，有大点大。Q 是核心远程消耗与清线技能，W 提供关键控制与功能选择，E 提升攻速减 CD，R 是全局支援与开团核心。
+        </div>
+        <div class="content-title" style="font-size:16px;margin:15px 0 8px;">基础连招</div>
+        <div class="skill-content">
+            <strong>消耗连招：</strong>W 选黄牌 → 远程平 A 眩晕 → Q 打伤害 → 后退等待技能冷却<br>
+            <strong>爆发连招：</strong>W 选黄牌 → 平 A 眩晕 → Q+E + 平 A → 视情况 R 支援或追击<br>
+            <strong>支援连招：</strong>R 开启全图视野 → 选定落点击破 → W 选牌（提前洗牌）→ 落地黄牌控住目标 → Q 打伤害
+        </div>
+        <div class="content-title" style="font-size:16px;margin:15px 0 8px;">团战思路 & 技巧细节</div>
+        <div class="skill-content">
+            <strong>团战思路：</strong>保持安全距离用 Q 远程消耗，W 黄牌留作控制敌方核心或保护自己；团战爆发时，利用 R 技能绕后或侧翼切入，黄牌控住敌方后排配合队友秒杀；R 技能也可用于收割残血或紧急逃生。<br>
+            1. W 选牌技巧：提前洗牌，根据局势选择黄牌（控制）、蓝牌（回蓝）或红牌（AOE 减速）<br>
+            2. R 技能使用：注意引导时间（1.5 秒），落地位置要避开敌方控制技能；可用于分割战场、封路拦截或支援队友<br>
+            3. 中亚时机：被敌方刺客切入时及时开启，避免被秒，等待技能冷却或队友支援<br>
+            4. 被动利用：每四次攻击附加额外伤害，提升攻速并减少技能冷却，配合 E 技能效果更佳<br>
+            5. 配合控制：与有稳定控制的队友（如安妮、猴子）配合，他们控住敌人后，你接 WQ 技能能确保命中，打出高额伤害。
+        </div>
+    </div>
+</body>
+</html>
