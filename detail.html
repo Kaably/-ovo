@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英雄详情 - 大乱斗海克斯助手</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="detail-container">
+    <a href="index.html" class="back-btn">← 返回首页</a>
+    <h2 id="heroName">英雄名称</h2>
+    <div class="hero-info">
+      <div class="info-item">
+        <h4>海克斯推荐：</h4>
+        <p id="heroHex"></p>
+      </div>
+      <div class="info-item">
+        <h4>装备推荐：</h4>
+        <p id="heroEquip"></p>
+      </div>
+      <div class="info-item">
+        <h4>玩法备注：</h4>
+        <p id="heroNote"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 获取URL中的英雄名称
+    const urlParams = new URLSearchParams(window.location.search);
+    const heroName = urlParams.get('hero');
+    const heroData = {
+      "亚索": {
+        hex: "狂风绝息、致命节奏、嗜血猎手",
+        equip: "无尽+电刀+饮血剑+水银",
+        note: "优先暴击攻速，避免纯肉"
+      },
+      "奶妈": {
+        hex: "生命源泉、奥术彗星、法力流系带",
+        equip: "圣杯+香炉+救赎+流水法杖",
+        note: "偏辅助续航，少出输出装"
+      },
+      "盖伦": {
+        hex: "坚韧不屈、复苏之风、爆破专家",
+        equip: "黑切+日炎+反甲+狂徒",
+        note: "主坦抗伤，优先堆血量和护甲"
+      }
+    };
+
+    // 显示英雄信息
+    if (heroData[heroName]) {
+      document.getElementById('heroName').innerText = heroName;
+      document.getElementById('heroHex').innerText = heroData[heroName].hex;
+      document.getElementById('heroEquip').innerText = heroData[heroName].equip;
+      document.getElementById('heroNote').innerText = heroData[heroName].note;
+    } else {
+      document.getElementById('heroName').innerText = "暂无该英雄攻略";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大乱斗海克斯助手</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>大乱斗海克斯助手</h1>
+    <!-- 搜索框 -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索）">
+      <button onclick="searchHero()">搜索</button>
+    </div>
+
+    <!-- 热门英雄 -->
+    <div class="hot-hero">
+      <h3>热门英雄</h3>
+      <div class="hero-list">
+        <div class="hero-item" onclick="gotoDetail('亚索')">
+          <img src="images/yasuo.jpg" alt="亚索">
+          <span>亚索</span>
+        </div>
+        <div class="hero-item" onclick="gotoDetail('奶妈')">
+          <img src="images/nana.jpg" alt="奶妈">
+          <span>奶妈</span>
+        </div>
+        <div class="hero-item" onclick="gotoDetail('盖伦')">
+          <img src="images/gailun.jpg" alt="盖伦">
+          <span>盖伦</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
