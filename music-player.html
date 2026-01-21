@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>背景音乐</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 15px;
+      background: #fdf9f6;
+      font-family: 微软雅黑, sans-serif;
+    }
+    .player-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+    .music-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ff4500;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .music-btn:hover {
+      background: #ff6347;
+    }
+  </style>
+</head>
+<body>
+  <div class="player-container">
+    <button class="music-btn" id="playPauseBtn">🎧</button>
+    <span>背景音乐</span>
+  </div>
+
+  <audio id="bgMusic" autoplay loop preload="auto">
+    <source src="music/bgm.mp3" type="audio/mpeg">
+    您的浏览器不支持音频播放
+  
+
+  <script>
+    const bgMusic = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    let isPlaying = true;
+
+    // 按钮切换播放/暂停
+    playPauseBtn.addEventListener('click', function() {
+      if (isPlaying) {
+        bgMusic.pause();
+        playPauseBtn.innerHTML = "🎵";
+      } else {
+        bgMusic.play();
+        playPauseBtn.innerHTML = "🎧";
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // 页面关闭时暂停音乐（可选）
+    window.addEventListener('beforeunload', function() {
+      bgMusic.pause();
+    });
+  </script>
+</body>
+</html>
