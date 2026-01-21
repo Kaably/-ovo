@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>大乱斗海克斯助手 - 内容页</title>
+  <title>大乱斗海克斯助手 - 小帅出品</title>
   <style>
     * {
       margin: 0;
@@ -162,6 +162,28 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
+    /* 🎵 右下角悬浮音乐控制 */
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #ff4500;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      z-index: 9999;
+      transition: transform 0.2s ease;
+    }
+    .music-control:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -181,7 +203,6 @@
     <div class="hot-hero">
       <h3>热门英雄攻略</h3>
       <div class="hero-list">
-        <!-- 点击英雄时，iframe跳转攻略页，父页面音乐不中断 -->
         <div class="hero-item" onclick="window.location.href='yasuo.html'">
           <img src="images/yasuo.jpg" alt="亚索">
           <span>亚索</span>
@@ -225,13 +246,19 @@
 
   <div class="toast" id="thankToast">感谢支持 会持续更新✨</div>
 
+  <!-- 背景音乐播放器 -->
+  <audio id="bgmPlayer" loop preload="auto" style="display: none;">
+    <source src="music/bgm.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 悬浮音乐控制按钮 -->
+  <div class="music-control" id="musicControlBtn">🎧</div>
+
   <script>
-    // 1. 获取DOM元素
+    // 1. 模态框控制
     const modal = document.getElementById('imageModal');
     const thankToast = document.getElementById('thankToast');
-    const searchInput = document.getElementById('searchInput');
-
-    // 2. 模态框控制
+    
     function openModal() {
       modal.style.display = 'block';
     }
@@ -241,7 +268,6 @@
       showThankToast();
     }
 
-    // 3. 显示感谢提示
     function showThankToast() {
       thankToast.style.display = 'block';
       thankToast.style.opacity = '1';
@@ -253,14 +279,13 @@
       }, 3000);
     }
 
-    // 4. 点击外部关闭模态框
     window.onclick = function(e) {
       if (e.target === modal) closeModal();
     };
 
-    // 5. 增强版搜索功能
+    // 2. 增强版模糊搜索
     function searchHero() {
-      const input = searchInput.value.trim().toLowerCase();
+      const input = document.getElementById('searchInput').value.trim().toLowerCase();
       if (!input) {
         alert('请输入英雄名称搜索（如亚索、齐天大圣）');
         return;
@@ -290,11 +315,55 @@
       }
     }
 
-    // 6. 支持回车键搜索
-    searchInput.addEventListener('keypress', function(e) {
+    // 支持回车键搜索
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
         searchHero();
       }
+    });
+
+    // 3. 背景音乐控制（跳转不中断）
+    const bgm = document.getElementById('bgmPlayer');
+    const musicBtn = document.getElementById('musicControlBtn');
+    let isPlaying = localStorage.getItem('bgmPlaying') === 'true' || false;
+
+    window.onload = function() {
+      // 恢复上次播放位置
+      const savedTime = localStorage.getItem('bgmCurrentTime') || 0;
+      bgm.currentTime = savedTime;
+
+      // 自动播放（解决浏览器限制）
+      if (isPlaying) {
+        bgm.muted = false;
+        bgm.play().catch(() => {
+          document.body.addEventListener('click', () => {
+            bgm.muted = false;
+            bgm.play();
+          }, { once: true });
+        });
+        musicBtn.innerHTML = "🎧";
+      } else {
+        musicBtn.innerHTML = "🎵";
+      }
+
+      // 实时保存播放位置
+      bgm.addEventListener('timeupdate', () => {
+        localStorage.setItem('bgmCurrentTime', bgm.currentTime);
+      });
+    };
+
+    // 悬浮按钮控制播放/暂停
+    musicBtn.addEventListener('click', function() {
+      if (isPlaying) {
+        bgm.pause();
+        musicBtn.innerHTML = "🎵";
+      } else {
+        bgm.muted = false;
+        bgm.play();
+        musicBtn.innerHTML = "🎧";
+      }
+      isPlaying = !isPlaying;
+      localStorage.setItem('bgmPlaying', isPlaying);
     });
   </script>
 </body>
