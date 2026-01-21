@@ -5,38 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>大乱斗海克斯助手 - 小帅出品</title>
   <style>
-    /* 全局样式：渐变背景+统一缓动特效 */
+    /* 全局样式：优化渐变+统一缓动+字体精细度 */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 微软雅黑, "黑体", sans-serif;
       transition: all 0.3s ease-in-out;
+      font-smoothing: antialiased;
+      -webkit-font-smoothing: antialiased;
     }
     body {
-      background: linear-gradient(120deg, #fff8f5, #fff0eb);
+      background: linear-gradient(135deg, #fdf9f6, #f8f3ef);
       padding: 20px;
       min-height: 100vh;
+      position: relative;
     }
-    /* 主容器：立体卡片+细腻阴影 */
+    /* 主容器：升级阴影+圆角+内边距，更通透 */
     .container {
-      max-width: 950px;
+      max-width: 1000px;
       margin: 0 auto;
       background: #ffffff;
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(255, 69, 0, 0.08), 0 2px 10px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(255, 69, 0, 0.1);
+      padding: 45px 35px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(255, 69, 0, 0.06), 0 3px 15px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.03);
     }
-    /* 标题区域：新增音乐按钮布局 */
+    /* 标题区域：优化间距+文字质感+分割线 */
     .title-box {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 45px;
       position: relative;
-      padding-bottom: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding-bottom: 25px;
     }
     .title-box::after {
       content: "";
@@ -44,214 +44,222 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 120px;
-      height: 4px;
-      background: linear-gradient(90deg, #ff4500, #ff9500);
-      border-radius: 2px;
-    }
-    /* 音乐控制按钮：样式和页面统一 */
-    .music-control {
-      position: absolute;
-      top: 0;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .music-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(90deg, #ff4500, #ff6347);
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(255, 69, 0, 0.2);
-    }
-    .music-btn:hover {
-      background: linear-gradient(90deg, #ff3300, #ff4500);
-      transform: scale(1.1);
-      box-shadow: 0 6px 15px rgba(255, 69, 0, 0.3);
+      width: 150px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ff4500, transparent);
+      border-radius: 3px;
     }
     h1 {
-      font-size: 36px;
-      background: linear-gradient(90deg, #ff4500, #ff7849);
+      font-size: 38px;
+      background: linear-gradient(90deg, #333333, #666666);
       -webkit-background-clip: text;
       color: transparent;
-      margin-bottom: 12px;
-      letter-spacing: 2px;
+      margin-bottom: 15px;
+      letter-spacing: 3px;
+      font-weight: 700;
     }
     .title-box i {
-      font-size: 24px;
-      color: #ff7849;
-      margin: 0 10px;
+      font-size: 26px;
+      color: #ff4500;
+      margin: 0 12px;
     }
     .subtitle {
-      color: #666666;
+      color: #888888;
       font-style: italic;
-      font-size: 18px;
+      font-size: 19px;
       letter-spacing: 1px;
+      font-weight: 500;
     }
-    /* 搜索区域：优化布局+立体质感+渐变按钮 */
+    /* 搜索区域：升级圆角+阴影+内边距，更精致 */
     .search-container {
       width: 100%;
-      max-width: 550px;
-      margin: 0 auto 50px;
+      max-width: 600px;
+      margin: 0 auto 55px;
       position: relative;
     }
     .search-box {
       display: flex;
-      gap: 12px;
+      gap: 15px;
     }
     #searchInput {
       flex: 1;
-      padding: 14px 20px;
-      border: 1px solid rgba(255, 69, 0, 0.15);
-      border-radius: 30px;
-      font-size: 16px;
-      background: #ffffff;
-      box-shadow: 0 2px 8px rgba(255, 69, 0, 0.05) inset;
+      padding: 15px 25px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 35px;
+      font-size: 17px;
+      background: #fafafa;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03) inset;
+      color: #333;
+    }
+    #searchInput::placeholder {
+      color: #cccccc;
     }
     #searchInput:focus {
       border-color: #ff4500;
-      box-shadow: 0 0 8px rgba(255, 69, 0, 0.2), 0 2px 8px rgba(255, 69, 0, 0.05) inset;
+      box-shadow: 0 0 10px rgba(255, 69, 0, 0.15), 0 3px 10px rgba(0, 0, 0, 0.03) inset;
       outline: none;
       transform: translateY(-2px);
+      background: #fff;
     }
     .search-box button {
-      padding: 0 25px;
+      padding: 0 30px;
       background: linear-gradient(90deg, #ff4500, #ff6347);
       color: white;
       border: none;
-      border-radius: 30px;
+      border-radius: 35px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: bold;
-      box-shadow: 0 4px 10px rgba(255, 69, 0, 0.2);
+      box-shadow: 0 5px 15px rgba(255, 69, 0, 0.25);
     }
     .search-box button:hover {
       background: linear-gradient(90deg, #ff3300, #ff4500);
       transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(255, 69, 0, 0.3);
+      box-shadow: 0 7px 20px rgba(255, 69, 0, 0.35);
     }
-    /* 模糊搜索下拉：优化样式+hover特效 */
+    /* 模糊搜索下拉：升级样式+间距+圆角 */
     .search-dropdown {
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
-      margin-top: 8px;
+      margin-top: 10px;
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      max-height: 220px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      max-height: 250px;
       overflow-y: auto;
       z-index: 999;
       display: none;
-      border: 1px solid rgba(255, 69, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 8px 0;
     }
     .search-dropdown-item {
-      padding: 12px 20px;
+      padding: 13px 25px;
       cursor: pointer;
       color: #333333;
-      font-size: 16px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    .search-dropdown-item:last-child {
-      border-bottom: none;
+      font-size: 17px;
     }
     .search-dropdown-item:hover {
-      background: linear-gradient(90deg, #fff8f5, #fff0eb);
+      background: #f8f8f8;
       color: #ff4500;
-      padding-left: 25px;
+      padding-left: 30px;
     }
-    /* 热门英雄板块：标题装饰+布局优化 */
+    /* 热门英雄板块：升级标题+布局 */
     .hot-hero {
       margin: 0 auto;
-      max-width: 850px;
+      max-width: 900px;
     }
     .hot-hero h3 {
-      font-size: 20px;
+      font-size: 22px;
       color: #333333;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-weight: bold;
+      gap: 12px;
+      font-weight: 700;
+      padding-left: 5px;
     }
     .hot-hero h3::before {
       content: "";
-      width: 6px;
-      height: 20px;
-      background: linear-gradient(180deg, #ff4500, #ff9500);
-      border-radius: 3px;
+      width: 8px;
+      height: 22px;
+      background: #ff4500;
+      border-radius: 4px;
     }
-    /* 英雄列表：网格优化+卡片式英雄项 */
+    /* 英雄列表：优化网格+间距，更舒展 */
     .hero-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 30px 20px;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 35px 25px;
     }
+    /* 英雄项：升级卡片+悬浮效果，更高级 */
     .hero-item {
       text-align: center;
       cursor: pointer;
       position: relative;
-      padding: 10px;
-      border-radius: 12px;
-    }
-    /* 英雄头像：渐变边框+立体阴影+hover动效（缩放+旋转+阴影） */
-    .hero-item img {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-      border: 3px solid transparent;
-      background: linear-gradient(#fff, #fff) padding-box,
-                  linear-gradient(90deg, #ff4500, #ff9500) border-box;
-      box-shadow: 0 6px 15px rgba(255, 69, 0, 0.15);
-    }
-    .hero-item:hover img {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 10px 20px rgba(255, 69, 0, 0.25);
+      padding: 15px;
+      border-radius: 15px;
+      background: #fafafa;
+      border: 1px solid rgba(0, 0, 0, 0.03);
     }
     .hero-item:hover {
-      background: linear-gradient(120deg, #fff8f5, #fff0eb);
-      transform: translateY(-5px);
+      background: #fff;
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(255, 69, 0, 0.1);
+      border-color: rgba(255, 69, 0, 0.1);
     }
-    /* 英雄名字：加粗+文字阴影+字号优化 */
+    /* 英雄头像：升级边框+阴影+尺寸 */
+    .hero-item img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      border: 4px solid #f5f5f5;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+    .hero-item:hover img {
+      transform: scale(1.08);
+      border-color: rgba(255, 69, 0, 0.2);
+    }
+    /* 英雄名字：升级字体+间距+阴影 */
     .hero-item span {
-      font-size: 19px;
+      font-size: 20px;
       color: #333333;
-      font-weight: bold;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       display: block;
+      letter-spacing: 0.5px;
     }
-    /* 赞赏按钮：悬浮固定+渐变+立体阴影+hover动效 */
+    /* 赞赏按钮：升级样式+尺寸+阴影 */
     .float-btn {
       position: fixed;
-      bottom: 40px;
-      right: 40px;
-      padding: 14px 22px;
+      bottom: 45px;
+      right: 45px;
+      padding: 15px 25px;
       background: linear-gradient(90deg, #ff4500, #ff6347);
       color: white;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: bold;
-      box-shadow: 0 6px 15px rgba(255, 69, 0, 0.3);
-      z-index: 999;
+      box-shadow: 0 8px 20px rgba(255, 69, 0, 0.35);
+      z-index: 998;
     }
     .float-btn:hover {
       background: linear-gradient(90deg, #ff3300, #ff4500);
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 20px rgba(255, 69, 0, 0.4);
+      box-shadow: 0 10px 25px rgba(255, 69, 0, 0.45);
     }
-    /* 弹窗：优化圆角+阴影+图片质感 */
+    /* 黑白悬浮音乐控制窗：核心优化（大尺寸+极简+可拖动） */
+    .music-float {
+      position: fixed;
+      bottom: 45px;
+      left: 45px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #333333;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .music-float:hover {
+      background: #f8f8f8;
+      transform: scale(1.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .music-float i {
+      font-size: 32px;
+      color: #333333;
+    }
+    /* 弹窗：升级模糊+圆角+阴影+内边距 */
     .modal {
       display: none;
       position: fixed;
@@ -260,71 +268,138 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(5px);
+      background-color: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(8px);
     }
     .modal-content {
-      margin: 8% auto;
+      margin: 6% auto;
       text-align: center;
       position: relative;
-      max-width: 650px;
-      padding: 10px;
+      max-width: 700px;
+      padding: 15px;
     }
     .close-btn {
       position: absolute;
-      top: -50px;
+      top: -60px;
       right: 0;
       color: white;
-      font-size: 40px;
+      font-size: 45px;
       cursor: pointer;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
     }
     .close-btn:hover {
       color: #ff4500;
       background: rgba(255, 255, 255, 0.1);
+      transform: rotate(90deg);
     }
     .modal-content img {
       width: 100%;
-      max-width: 600px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      max-width: 650px;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.1);
     }
-    /* 响应式适配：手机端自动调整 */
-    @media (max-width: 768px) {
-      h1 {
+    /* 滚动条美化：全局极简滚动条 */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f5f5f5;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cccccc;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff4500;
+    }
+    /* 响应式适配：全尺寸精细调整 */
+    @media (max-width: 992px) {
+      .music-float {
+        width: 70px;
+        height: 70px;
+        bottom: 35px;
+        left: 35px;
+      }
+      .music-float i {
         font-size: 28px;
       }
+      .float-btn {
+        bottom: 35px;
+        right: 35px;
+        padding: 14px 22px;
+        font-size: 17px;
+      }
+    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 30px;
+        letter-spacing: 2px;
+      }
       .container {
-        padding: 30px 20px;
+        padding: 35px 20px;
+        border-radius: 15px;
       }
       .hero-list {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-        gap: 20px 15px;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 25px 15px;
       }
       .hero-item img {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
+      }
+      .hero-item span {
+        font-size: 18px;
+      }
+      .search-container {
+        max-width: 450px;
+      }
+      .music-float {
+        width: 65px;
+        height: 65px;
+        bottom: 25px;
+        left: 25px;
+      }
+      .music-float i {
+        font-size: 26px;
       }
       .float-btn {
-        bottom: 20px;
-        right: 20px;
+        bottom: 25px;
+        right: 25px;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 40px;
+      }
+      .modal-content {
+        margin: 15% auto;
+        max-width: 90%;
+      }
+    }
+    @media (max-width: 480px) {
+      .music-float {
+        width: 60px;
+        height: 60px;
+      }
+      .music-float i {
+        font-size: 24px;
+      }
+      .search-box {
+        gap: 10px;
+      }
+      #searchInput {
         padding: 12px 20px;
         font-size: 16px;
       }
-      .search-container {
-        max-width: 400px;
-      }
-      .music-control {
-        right: 10px;
-      }
-      .music-btn {
-        width: 35px;
-        height: 35px;
+      .search-box button {
+        padding: 0 20px;
         font-size: 16px;
       }
     }
@@ -333,21 +408,16 @@
 <body>
   <div class="container">
     <div class="title-box">
-      <!-- 音乐控制按钮 -->
-      <div class="music-control">
-        <button id="musicBtn" class="music-btn">▶️</button>
-      </div>
       <h1><i>⚔️</i>大乱斗海克斯助手<i>⚔️</i></h1>
       <p class="subtitle">小帅出品 必属精品</p>
     </div>
 
     <!-- 隐藏的音频元素：循环播放+预加载 -->
     <audio id="bgMusic" loop preload="auto">
-      <!-- 替换成你的背景音乐路径，建议用MP3格式，支持多格式兼容 -->
       <source src="music/bgm.mp3" type="audio/mpeg">
       <source src="music/bgm.ogg" type="audio/ogg">
       您的浏览器不支持音频播放
-    </audio>
+    
 
     <!-- 搜索区域（保留模糊+别名功能） -->
     <div class="search-container">
@@ -396,7 +466,12 @@
     </div>
   </div>
 
-  <!-- 赞赏按钮+弹窗（功能不变） -->
+  <!-- 黑白悬浮音乐控制窗（左下方大尺寸） -->
+  <div class="music-float" id="musicFloat" draggable="true">
+    <i id="musicIcon">▶️</i>
+  </div>
+
+  <!-- 赞赏按钮+弹窗（功能不变+样式升级） -->
   <button class="float-btn" onclick="openModal()">赞赏作者</button>
   <div id="imageModal" class="modal">
     <div class="modal-content">
@@ -406,38 +481,57 @@
   </div>
 
   <script>
-    // ===================== 背景音乐控制逻辑 =====================
+    // ===================== 黑白悬浮音乐窗：播放+暂停+可拖动 =====================
     const bgMusic = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicBtn');
+    const musicFloat = document.getElementById('musicFloat');
+    const musicIcon = document.getElementById('musicIcon');
     let isPlaying = false; // 初始未播放（解决自动播放限制）
 
-    // 按钮点击切换播放/暂停
-    musicBtn.addEventListener('click', toggleMusic);
-
-    // 解决浏览器自动播放限制：用户点击页面任意位置后允许播放
+    // 播放/暂停切换
+    musicFloat.addEventListener('click', toggleMusic);
+    // 解决浏览器自动播放限制：用户点击页面任意位置后初始化音频
     document.addEventListener('click', function initMusic() {
       if (!isPlaying) {
-        bgMusic.load(); // 重新加载音频（确保可播放）
-        document.removeEventListener('click', initMusic); // 只执行一次
+        bgMusic.load();
+        document.removeEventListener('click', initMusic);
       }
     }, { once: true });
 
-    // 播放/暂停切换函数
+    // 播放/暂停核心函数
     function toggleMusic() {
       if (isPlaying) {
         bgMusic.pause();
-        musicBtn.innerHTML = "▶️"; // 暂停显示播放图标
+        musicIcon.innerHTML = "▶️"; // 暂停显示播放图标
       } else {
         bgMusic.play().catch(err => {
           console.log("音频播放失败：", err);
           alert("点击页面任意位置后再尝试播放音乐（浏览器安全限制）");
         });
-        musicBtn.innerHTML = "⏸️"; // 播放显示暂停图标
+        musicIcon.innerHTML = "⏸️"; // 播放显示暂停图标
       }
       isPlaying = !isPlaying;
     }
 
-    // ===================== 原有搜索+弹窗逻辑 =====================
+    // 悬浮音乐窗可拖动功能（极简拖动，不卡顿）
+    musicFloat.addEventListener('dragstart', function(e) {
+      const style = window.getComputedStyle(e.target, null);
+      const x = parseInt(style.getPropertyValue('left')) - e.clientX;
+      const y = parseInt(style.getPropertyValue('top')) - e.clientY;
+      e.dataTransfer.setData('text', `${x},${y}`);
+    });
+    document.addEventListener('dragover', function(e) {
+      e.preventDefault(); // 允许放置
+    });
+    document.addEventListener('drop', function(e) {
+      e.preventDefault();
+      const [x, y] = e.dataTransfer.getData('text').split(',').map(Number);
+      musicFloat.style.left = `${e.clientX + x}px`;
+      musicFloat.style.top = `${e.clientY + y}px`;
+      musicFloat.style.bottom = 'auto'; // 拖动后取消固定底部
+      musicFloat.style.right = 'auto';  // 拖动后取消固定右侧
+    });
+
+    // ===================== 原有搜索+弹窗逻辑（功能不变） =====================
     const heroData = [
       {name: "亚索", aliases: ["亚索"], keywords: ["亚", "亚索"], url: "yasuo.html"},
       {name: "盖伦", aliases: ["盖伦"], keywords: ["盖", "盖伦"], url: "gailun.html"},
