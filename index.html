@@ -1,231 +1,238 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>大乱斗海克斯助手 - 小帅出品</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "微软雅黑", sans-serif;
-    }
-    body {
-      background: #fdf9f6;
-      padding: 20px;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
-    .title-box {
-      text-align: center;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 3px solid #ff4500;
-    }
-    h1 {
-      font-size: 36px;
-      color: #333;
-      margin-bottom: 10px;
-    }
-    .subtitle {
-      color: #888;
-      font-style: italic;
-    }
-    .search-container {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto 50px;
-    }
-    .search-box {
-      display: flex;
-      gap: 15px;
-    }
-    #searchInput {
-      flex: 1;
-      padding: 15px 20px;
-      border: 1px solid #ddd;
-      border-radius: 30px;
-      font-size: 16px;
-    }
-    .search-box button {
-      padding: 0 25px;
-      background: #ff4500;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .hot-hero {
-      margin: 0 auto;
-      max-width: 900px;
-    }
-    .hot-hero h3 {
-      font-size: 22px;
-      color: #333;
-      margin-bottom: 30px;
-      padding-left: 10px;
-      border-left: 4px solid #ff4500;
-    }
-    .hero-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 30px;
-    }
-    .hero-item {
-      text-align: center;
-      cursor: pointer;
-      padding: 15px;
-      border-radius: 15px;
-      background: #fafafa;
-      direction: ltr;
-      writing-mode: horizontal-tb;
-    }
-    .hero-item img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-      border: 3px solid #ff4500;
-      display: block;
-      opacity: 1;
-      visibility: visible;
-    }
-    .hero-item span {
-      font-size: 18px;
-      color: #333;
-      font-weight: bold;
-      transform: none;
-    }
-    .float-btn {
-      position: fixed;
-      bottom: 40px;
-      right: 40px;
-      padding: 14px 22px;
-      background: #ff4500;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 9998;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(5px);
-    }
-    .modal-content {
-      margin: 10% auto;
-      text-align: center;
-      max-width: 600px;
-      padding: 20px;
-    }
-    .modal-content img {
-      width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    }
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: white;
-      font-size: 40px;
-      cursor: pointer;
-    }
-    .toast {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.8);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-size: 16px;
-      z-index: 9998;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大乱斗海克斯助手 - 小帅出品</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        body {
+            background: #fdf9f6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .title-box {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #ff4500;
+        }
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #888;
+            font-style: italic;
+        }
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 50px;
+        }
+        .search-box {
+            display: flex;
+            gap: 15px;
+        }
+        #searchInput {
+            flex: 1;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+        }
+        .search-box button {
+            padding: 0 25px;
+            background: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .hot-hero {
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        .hot-hero h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 30px;
+            padding-left: 10px;
+            border-left: 4px solid #ff4500;
+        }
+        .hero-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 30px;
+        }
+        .hero-item {
+            text-align: center;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 15px;
+            background: #fafafa;
+        }
+        .hero-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #ff4500;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-item span {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+        /* 音乐悬浮图标样式 */
+        .music-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff4500;
+            color: #fff;
+            text-align: center;
+            line-height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 69, 0, 0.4);
+            z-index: 9999;
+            user-select: none;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="title-box">
-      <h1>⚔️ 大乱斗海克斯助手 ⚔️</h1>
-      <p class="subtitle">小帅出品 必属精品</p>
+    <div class="container">
+        <div class="title-box">
+            <h1>⚔️ 大乱斗海克斯助手 ⚔️</h1>
+            <p class="subtitle">小帅出品 必属精品</p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
+                <button onclick="searchHero()">搜索</button>
+            </div>
+        </div>
+
+        <div class="hot-hero">
+            <h3>热门英雄攻略</h3>
+            <div class="hero-list">
+                <div class="hero-item" onclick="window.location.href='yasuo.html'">
+                    <img src="images/yasuo.jpg" alt="亚索">
+                    <span>亚索</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='wuqi.html'">
+                    <img src="images/wuqi.jpg" alt="武器">
+                    <span>武器</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='yongen.html'">
+                    <img src="images/yongen.jpg" alt="永恩">
+                    <span>永恩</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="search-container">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
-        <button onclick="searchHero()">搜索</button>
-      </div>
-    </div>
+    <!-- 音乐悬浮图标 -->
+    <div class="music-float" id="musicBtn">▶️</div>
+    <!-- 音频标签（隐藏） -->
+    <audio id="bgMusic" loop>
+        <!-- 替换为你的背景音乐文件路径（如music/bgm.mp3） -->
+        <source src="music/bgm.mp3" type="audio/mpeg">
+    </audio>
 
-    <div class="hot-hero">
-      <h3>热门英雄攻略</h3>
-      <div class="hero-list">
-        <div class="hero-item" onclick="window.location.href='yasuo.html'">
-          <img src="images/yasuo.jpg" alt="亚索">
-          <span>亚索</span>
-        </div>
-        <div class="hero-item" onclick="window.location.href='gailun.html'">
-          <img src="images/gailun.jpg" alt="盖伦">
-          <span>盖伦</span>
-        </div>
-        <div class="hero-item" onclick="window.location.href='yongen.html'">
-          <img src="images/yongen.jpg" alt="永恩">
-          <span>永恩</span>
-        </div>
-        <div class="hero-item" onclick="window.location.href='wuqi.html'">
-          <img src="images/wuqi.jpg" alt="武器">
-          <span>武器</span>
-        </div>
-        <div class="hero-item" onclick="window.location.href='houzi.html'">
-          <img src="images/houzi.jpg" alt="猴子">
-          <span>猴子</span>
-        </div>
-        <div class="hero-item" onclick="window.location.href='chuanzhang.html'">
-          <img src="images/chuanzhang.jpg" alt="船长">
-          <span>船长</span>
-        </div>
-        <div class="hero-item" onclick="window.location.href='anni.html'">
-          <img src="images/anni.jpg" alt="安妮">
-          <span>安妮</span>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script>
+        // 模糊搜索功能
+        function searchHero() {
+            const input = document.getElementById('searchInput').value.trim().toLowerCase();
+            if (!input) {
+                alert('请输入英雄名称搜索！');
+                return;
+            }
+            const heroMap = {
+                '亚索': 'yasuo.html',
+                '武器': 'wuqi.html',
+                '永恩': 'yongen.html',
+                '盖伦': 'gailun.html',
+                '猴子': 'houzi.html'
+            };
+            const matchHero = Object.keys(heroMap).find(hero => hero.includes(input));
+            if (matchHero) {
+                window.location.href = heroMap[matchHero];
+            } else {
+                alert('暂未收录该英雄攻略！');
+            }
+        }
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') searchHero();
+        });
 
-  <button class="float-btn" onclick="openModal()">赞赏作者</button>
+        // 全局背景音乐逻辑
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+        
+        // 初始化音频状态（从localStorage恢复）
+        window.onload = function() {
+            // 恢复播放进度
+            const savedTime = localStorage.getItem('bgMusicTime');
+            if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+            
+            // 恢复播放状态（先静音自动播放，兼容浏览器策略）
+            bgMusic.muted = true; // 静音自动播放
+            bgMusic.play().then(() => {
+                musicBtn.innerText = '⏸️';
+                localStorage.setItem('bgMusicPaused', 'false');
+            }).catch(err => {
+                musicBtn.innerText = '▶️';
+                localStorage.setItem('bgMusicPaused', 'true');
+            });
 
-  <div class="modal" id="imageModal">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <div class="modal-content">
-      <img src="images/彩蛋图片.jpg" alt="赞赏图片">
-    </div>
-  </div>
+            // 同步按钮状态
+            const isPaused = localStorage.getItem('bgMusicPaused') === 'true';
+            musicBtn.innerText = isPaused ? '▶️' : '⏸️';
+        };
 
-  <div class="toast" id="thankToast">感谢支持 会持续更新✨</div>
+        // 监听页面离开，保存播放状态/进度
+        window.onbeforeunload = function() {
+            localStorage.setItem('bgMusicTime', bgMusic.currentTime);
+            localStorage.setItem('bgMusicPaused', bgMusic.paused);
+        };
 
-  <script>
-    // 赞赏弹窗+感谢提示
-    const modal = document.getElementById('imageModal');
-    const thank
+        // 播放/暂停切换
+        musicBtn.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.muted = false; // 解锁声音
+                bgMusic.play();
+                musicBtn.innerText = '⏸️';
+                localStorage.setItem('bgMusicPaused', 'false');
+            } else {
+                bgMusic.pause();
+                musicBtn.innerText = '▶️';
+                localStorage.setItem('bgMusicPaused', 'true');
+            }
+        });
+    </script>
+</body>
+</html>
