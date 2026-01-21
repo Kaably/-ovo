@@ -121,7 +121,7 @@
         <div class="hot-hero">
             <h3>热门英雄攻略</h3>
             <div class="hero-list">
-                <!-- 补全所有原有英雄，和最初列表一致 -->
+                <!-- 原有英雄 -->
                 <div class="hero-item" onclick="window.location.href='yasuo.html'">
                     <img src="images/yasuo.jpg" alt="亚索">
                     <span>亚索</span>
@@ -150,12 +150,38 @@
                     <img src="images/anni.jpg" alt="安妮">
                     <span>安妮</span>
                 </div>
+
+                <!-- 新增6位英雄 -->
+                <div class="hero-item" onclick="window.location.href='bingnv.html'">
+                    <img src="images/bingnv.jpg" alt="冰女">
+                    <span>冰女</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='huonan.html'">
+                    <img src="images/huonan.jpg" alt="火男">
+                    <span>火男</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='kapai.html'">
+                    <img src="images/kapai.jpg" alt="卡牌大师">
+                    <span>卡牌大师</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='liliya.html'">
+                    <img src="images/liliya.jpg" alt="莉莉娅">
+                    <span>莉莉娅</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='yanque.html'">
+                    <img src="images/yanque.jpg" alt="岩雀">
+                    <span>岩雀</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='zelasi.html'">
+                    <img src="images/zelasi.jpg" alt="泽拉斯">
+                    <span>泽拉斯</span>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 模糊搜索功能（对应所有英雄，和最初一致）
+        // 模糊搜索功能（包含所有原有+新增英雄，支持本名+别名）
         function searchHero() {
             const input = document.getElementById('searchInput').value.trim().toLowerCase();
             if (!input) {
@@ -163,13 +189,21 @@
                 return;
             }
             const heroData = [
+                // 原有英雄
                 { names: ['亚索', '疾风剑豪'], page: 'yasuo.html' },
                 { names: ['盖伦', '德玛西亚之力'], page: 'gailun.html' },
                 { names: ['永恩', '封魔剑魂'], page: 'yongen.html' },
                 { names: ['武器', '武器大师', '贾克斯'], page: 'wuqi.html' },
                 { names: ['猴子', '齐天大圣', '孙悟空'], page: 'houzi.html' },
                 { names: ['船长', '海洋之灾', '普朗克'], page: 'chuanzhang.html' },
-                { names: ['安妮', '黑暗之女'], page: 'anni.html' }
+                { names: ['安妮', '黑暗之女'], page: 'anni.html' },
+                // 新增6位英雄（含别名）
+                { names: ['冰女', '丽桑卓'], page: 'bingnv.html' },
+                { names: ['火男', '复仇焰魂', '布兰德'], page: 'huonan.html' },
+                { names: ['卡牌大师', '崔斯特'], page: 'kapai.html' },
+                { names: ['莉莉娅', '含羞蓓蕾'], page: 'liliya.html' },
+                { names: ['岩雀', '塔莉垭'], page: 'yanque.html' },
+                { names: ['泽拉斯', '远古巫灵'], page: 'zelasi.html' }
             ];
             const results = heroData.filter(hero => hero.names.some(name => name.toLowerCase().includes(input)));
             if (results.length === 1) window.location.href = results[0].page;
