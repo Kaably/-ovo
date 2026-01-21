@@ -39,14 +39,11 @@
       color: #888;
       font-style: italic;
     }
-    /* 搜索区域 - 确保显示 */
+    /* 搜索区域 */
     .search-container {
       width: 100%;
       max-width: 600px;
       margin: 0 auto 50px;
-      border: 1px solid #ddd; /* 加边框验证显示 */
-      padding: 10px;
-      border-radius: 10px;
     }
     .search-box {
       display: flex;
@@ -68,13 +65,10 @@
       cursor: pointer;
       font-weight: bold;
     }
-    /* 英雄列表 - 确保显示 */
+    /* 英雄列表 */
     .hot-hero {
       margin: 0 auto;
       max-width: 900px;
-      border: 1px solid #ddd; /* 加边框验证显示 */
-      padding: 10px;
-      border-radius: 10px;
     }
     .hot-hero h3 {
       font-size: 22px;
@@ -94,6 +88,10 @@
       padding: 15px;
       border-radius: 15px;
       background: #fafafa;
+    }
+    .hero-item:hover {
+      background: #f5f5f5;
+      transform: translateY(-3px);
     }
     .hero-item img {
       width: 120px;
@@ -134,6 +132,12 @@
       justify-content: center;
       cursor: pointer;
       font-size: 28px;
+      /* 按钮hover效果 */
+      transition: all 0.3s ease;
+    }
+    .music-float:hover {
+      background: #f8f8f8;
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -145,7 +149,7 @@
       <p class="subtitle">小帅出品 必属精品</p>
     </div>
 
-    <!-- 搜索区域 - 彻底无音频干扰 -->
+    <!-- 搜索区域 -->
     <div class="search-container">
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
@@ -153,36 +157,36 @@
       </div>
     </div>
 
-    <!-- 英雄列表 - 彻底无音频干扰 -->
+    <!-- 英雄列表 -->
     <div class="hot-hero">
       <h3>热门英雄攻略</h3>
       <div class="hero-list">
-        <div class="hero-item" onclick="alert('亚索攻略')">
-          <img src="https://picsum.photos/120/120?random=1" alt="亚索">
+        <div class="hero-item" onclick="window.location.href='yasuo.html'">
+          <img src="images/yasuo.jpg" alt="亚索">
           <span>亚索</span>
         </div>
-        <div class="hero-item" onclick="alert('盖伦攻略')">
-          <img src="https://picsum.photos/120/120?random=2" alt="盖伦">
+        <div class="hero-item" onclick="window.location.href='gailun.html'">
+          <img src="images/gailun.jpg" alt="盖伦">
           <span>盖伦</span>
         </div>
-        <div class="hero-item" onclick="alert('永恩攻略')">
-          <img src="https://picsum.photos/120/120?random=3" alt="永恩">
+        <div class="hero-item" onclick="window.location.href='yongen.html'">
+          <img src="images/yongen.jpg" alt="永恩">
           <span>永恩</span>
         </div>
-        <div class="hero-item" onclick="alert('武器攻略')">
-          <img src="https://picsum.photos/120/120?random=4" alt="武器">
+        <div class="hero-item" onclick="window.location.href='wuqi.html'">
+          <img src="images/wuqi.jpg" alt="武器">
           <span>武器</span>
         </div>
-        <div class="hero-item" onclick="alert('猴子攻略')">
-          <img src="https://picsum.photos/120/120?random=5" alt="猴子">
+        <div class="hero-item" onclick="window.location.href='houzi.html'">
+          <img src="images/houzi.jpg" alt="猴子">
           <span>猴子</span>
         </div>
-        <div class="hero-item" onclick="alert('船长攻略')">
-          <img src="https://picsum.photos/120/120?random=6" alt="船长">
+        <div class="hero-item" onclick="window.location.href='chuanzhang.html'">
+          <img src="images/chuanzhang.jpg" alt="船长">
           <span>船长</span>
         </div>
-        <div class="hero-item" onclick="alert('安妮攻略')">
-          <img src="https://picsum.photos/120/120?random=7" alt="安妮">
+        <div class="hero-item" onclick="window.location.href='anni.html'">
+          <img src="images/anni.jpg" alt="安妮">
           <span>安妮</span>
         </div>
       </div>
@@ -193,8 +197,53 @@
   <div class="music-float" id="musicFloat">🎵</div>
   <button class="float-btn" onclick="alert('感谢您的支持！')">赞赏作者</button>
 
+  <!-- 音频标签：添加自动播放、循环、静音（绕过部分浏览器限制） -->
+  <audio id="bgMusic" autoplay loop preload="auto">
+    <source src="music/bgm.mp3" type="audio/mpeg">
+    您的浏览器不支持音频播放
+  
+
   <script>
-    // 简单搜索功能
+    // 音乐控制核心逻辑
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicFloat');
+    let isPlaying = true; // 初始状态为播放
+
+    // 页面加载后尝试自动播放（处理浏览器限制）
+    window.onload = function() {
+      // 强制设置音量，避免静音
+      bgMusic.volume = 0.5;
+      
+      // 监听自动播放失败事件
+      bgMusic.addEventListener('error', function() {
+        alert('音乐文件加载失败，请检查music/bgm.mp3路径是否正确');
+      });
+
+      // 处理浏览器禁止自动播放的情况
+      bgMusic.play().catch(function(err) {
+        console.log('自动播放失败，需要用户交互:', err);
+        isPlaying = false;
+        musicBtn.innerHTML = "🎶"; // 提示用户点击播放
+        alert('浏览器禁止自动播放音乐，请点击左下角音乐按钮开始播放');
+      });
+    };
+
+    // 点击音乐按钮切换播放/暂停
+    musicBtn.addEventListener('click', function() {
+      if (isPlaying) {
+        // 暂停音乐
+        bgMusic.pause();
+        musicBtn.innerHTML = "🎵"; // 暂停图标
+        isPlaying = false;
+      } else {
+        // 播放音乐
+        bgMusic.play();
+        musicBtn.innerHTML = "🎧"; // 播放图标
+        isPlaying = true;
+      }
+    });
+
+    // 搜索功能
     function searchHero() {
       const input = document.getElementById('searchInput').value.trim();
       if (!input) {
@@ -203,10 +252,12 @@
       }
       const heroMap = {
         "亚索": "yasuo.html", "盖伦": "gailun.html", "永恩": "yongen.html",
-        "猴子": "houzi.html", "船长": "chuanzhang.html", "武器": "wuqi.html", "安妮": "anni.html"
+        "猴子": "houzi.html", "齐天大圣": "houzi.html", "孙悟空": "houzi.html",
+        "船长": "chuanzhang.html", "海洋之灾": "chuanzhang.html", "普朗克": "chuanzhang.html",
+        "武器": "wuqi.html", "贾克斯": "wuqi.html", "安妮": "anni.html"
       };
       if (heroMap[input]) {
-        alert(`即将跳转到${input}攻略页面`);
+        window.location.href = heroMap[input];
       } else {
         alert('暂未收录该英雄攻略哦～');
       }
