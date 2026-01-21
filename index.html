@@ -1,71 +1,301 @@
-// 赞赏弹窗控制（保留原有功能）
-const modal = document.getElementById('imageModal');
-const thankToast = document.getElementById('thankToast');
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大乱斗海克斯助手 - 小帅出品</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 微软雅黑, sans-serif;
+    }
+    body {
+      background: #fdf9f6;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+    .title-box {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #ff4500;
+    }
+    h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #888;
+      font-style: italic;
+    }
+    .search-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 50px;
+    }
+    .search-box {
+      display: flex;
+      gap: 15px;
+    }
+    #searchInput {
+      flex: 1;
+      padding: 15px 20px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      font-size: 16px;
+    }
+    .search-box button {
+      padding: 0 25px;
+      background: #ff4500;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .hot-hero {
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    .hot-hero h3 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 30px;
+      padding-left: 10px;
+      border-left: 4px solid #ff4500;
+    }
+    .hero-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 30px;
+    }
+    .hero-item {
+      text-align: center;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 15px;
+      background: #fafafa;
+      direction: ltr;
+      writing-mode: horizontal-tb;
+    }
+    .hero-item img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 3px solid #ff4500;
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+    .hero-item span {
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+      transform: none;
+    }
+    .float-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      padding: 14px 22px;
+      background: #ff4500;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
+    }
+    .modal-content {
+      margin: 10% auto;
+      text-align: center;
+      max-width: 600px;
+      padding: 20px;
+    }
+    .modal-content img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+    }
+    .toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      z-index: 9999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title-box">
+      <h1>⚔️ 大乱斗海克斯助手 ⚔️</h1>
+      <p class="subtitle">小帅出品 必属精品</p>
+    </div>
 
-function openModal() {
-  modal.style.display = 'block';
-}
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
+        <button onclick="searchHero()">搜索</button>
+      </div>
+    </div>
 
-function closeModal() {
-  modal.style.display = 'none';
-  // 显示感谢提示
-  thankToast.style.display = 'block';
-  thankToast.style.opacity = '1';
-  // 3秒后自动隐藏提示
-  setTimeout(() => {
-    thankToast.style.opacity = '0';
-    setTimeout(() => {
-      thankToast.style.display = 'none';
-    }, 300);
-  }, 3000);
-}
+    <div class="hot-hero">
+      <h3>热门英雄攻略</h3>
+      <div class="hero-list">
+        <div class="hero-item" onclick="window.location.href='yasuo.html'">
+          <img src="images/yasuo.jpg" alt="亚索">
+          <span>亚索</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='gailun.html'">
+          <img src="images/gailun.jpg" alt="盖伦">
+          <span>盖伦</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='yongen.html'">
+          <img src="images/yongen.jpg" alt="永恩">
+          <span>永恩</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='wuqi.html'">
+          <img src="images/wuqi.jpg" alt="武器">
+          <span>武器</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='houzi.html'">
+          <img src="images/houzi.jpg" alt="猴子">
+          <span>猴子</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='chuanzhang.html'">
+          <img src="images/chuanzhang.jpg" alt="船长">
+          <span>船长</span>
+        </div>
+        <div class="hero-item" onclick="window.location.href='anni.html'">
+          <img src="images/anni.jpg" alt="安妮">
+          <span>安妮</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-// 点击弹窗外部关闭
-window.onclick = function(e) {
-  if (e.target === modal) closeModal();
-};
+  <button class="float-btn" onclick="openModal()">赞赏作者</button>
 
-// 增强版搜索功能（支持模糊匹配+别名搜索）
-function searchHero() {
-  const input = document.getElementById('searchInput').value.trim().toLowerCase();
-  if (!input) {
-    alert('请输入英雄名称搜索（如亚索、齐天大圣）');
-    return;
-  }
+  <div class="modal" id="imageModal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <img src="images/彩蛋图片.jpg" alt="赞赏图片">
+    </div>
+  </div>
 
-  // 英雄数据：包含主名+别名+对应页面
-  const heroData = [
-    { names: ['亚索', '疾风剑豪'], page: 'yasuo.html' },
-    { names: ['盖伦', '德玛西亚之力'], page: 'gailun.html' },
-    { names: ['永恩', '封魔剑魂'], page: 'yongen.html' },
-    { names: ['武器', '武器大师', '贾克斯'], page: 'wuqi.html' },
-    { names: ['猴子', '齐天大圣', '孙悟空'], page: 'houzi.html' },
-    { names: ['船长', '海洋之灾', '普朗克'], page: 'chuanzhang.html' },
-    { names: ['安妮', '黑暗之女'], page: 'anni.html' }
-  ];
+  <div class="toast" id="thankToast">感谢支持 会持续更新✨</div>
 
-  // 模糊搜索逻辑：匹配任意名称的任意部分
-  const results = heroData.filter(hero => {
-    return hero.names.some(name => 
-      name.toLowerCase().includes(input)
-    );
-  });
+  <!-- 关键：所有JS代码必须包裹在<script>标签中 -->
+  <script>
+    // 1. 获取DOM元素（修正getElementById拼写错误）
+    const modal = document.getElementById('imageModal');
+    const thankToast = document.getElementById('thankToast');
+    const searchInput = document.getElementById('searchInput');
 
-  if (results.length === 1) {
-    // 唯一匹配：直接跳转
-    window.location.href = results[0].page;
-  } else if (results.length > 1) {
-    // 多个匹配：提示用户选择
-    const heroNames = results.map(hero => hero.names[0]).join('、');
-    alert(`找到多个匹配英雄：${heroNames}\n请输入更精确的名称`);
-  } else {
-    alert('暂未收录该英雄攻略哦～');
-  }
-}
+    // 2. 模态框控制
+    function openModal() {
+      modal.style.display = 'block';
+    }
 
-// 支持回车键触发搜索
-document.getElementById('searchInput').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    searchHero();
-  }
-});
+    function closeModal() {
+      modal.style.display = 'none';
+      showThankToast();
+    }
+
+    // 3. 显示感谢提示
+    function showThankToast() {
+      thankToast.style.display = 'block';
+      thankToast.style.opacity = '1';
+      setTimeout(() => {
+        thankToast.style.opacity = '0';
+        setTimeout(() => {
+          thankToast.style.display = 'none';
+        }, 300);
+      }, 3000);
+    }
+
+    // 4. 点击外部关闭模态框
+    window.onclick = function(e) {
+      if (e.target === modal) closeModal();
+    };
+
+    // 5. 增强版搜索功能（模糊匹配+别名搜索）
+    function searchHero() {
+      const input = searchInput.value.trim().toLowerCase();
+      if (!input) {
+        alert('请输入英雄名称搜索（如亚索、齐天大圣）');
+        return;
+      }
+
+      const heroData = [
+        { names: ['亚索', '疾风剑豪'], page: 'yasuo.html' },
+        { names: ['盖伦', '德玛西亚之力'], page: 'gailun.html' },
+        { names: ['永恩', '封魔剑魂'], page: 'yongen.html' },
+        { names: ['武器', '武器大师', '贾克斯'], page: 'wuqi.html' },
+        { names: ['猴子', '齐天大圣', '孙悟空'], page: 'houzi.html' },
+        { names: ['船长', '海洋之灾', '普朗克'], page: 'chuanzhang.html' },
+        { names: ['安妮', '黑暗之女'], page: 'anni.html' }
+      ];
+
+      const results = heroData.filter(hero => {
+        return hero.names.some(name => name.toLowerCase().includes(input));
+      });
+
+      if (results.length === 1) {
+        window.location.href = results[0].page;
+      } else if (results.length > 1) {
+        const heroNames = results.map(hero => hero.names[0]).join('、');
+        alert(`找到多个匹配英雄：${heroNames}\n请输入更精确的名称`);
+      } else {
+        alert('暂未收录该英雄攻略哦~');
+      }
+    }
+
+    // 6. 支持回车键搜索
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchHero();
+      }
+    });
+  </script>
+</body>
+</html>
