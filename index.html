@@ -102,11 +102,11 @@
       margin-bottom: 8px;
       border: 2px solid #ff450030;
     }
-    /* 英雄名字：放大+去掉描边（核心修改） */
+    /* 英雄名字：18px黑色加粗，无描边 */
     .hero-item span {
-      font-size: 18px; /* 放大到18px，比原来大2px */
-      color: #000; /* 纯黑色 */
-      font-weight: bold; /* 保留加粗，去掉描边/阴影 */
+      font-size: 18px;
+      color: #000;
+      font-weight: bold;
       display: block;
       transform: rotate(0);
     }
@@ -174,20 +174,38 @@
     <div class="hot-hero">
       <h3>热门英雄</h3>
       <div class="hero-list">
-        <!-- 亚索：修复跳转，指向正确的yasuo.html -->
+        <!-- 原有英雄 -->
         <div class="hero-item" onclick="window.location.href='yasuo.html'">
           <img src="images/yasuo.jpg" alt="亚索">
           <span>亚索</span>
         </div>
-        <!-- 盖伦：修复跳转，指向gailun.html -->
         <div class="hero-item" onclick="window.location.href='gailun.html'">
           <img src="images/gailun.jpg" alt="盖伦">
           <span>盖伦</span>
         </div>
-        <!-- 永恩：跳转正确 -->
         <div class="hero-item" onclick="window.location.href='yongen.html'">
           <img src="images/yongen.jpg" alt="永恩">
           <span>永恩</span>
+        </div>
+        <!-- 新增英雄：武器 -->
+        <div class="hero-item" onclick="window.location.href='wuqi.html'">
+          <img src="images/wuqi.jpg" alt="武器">
+          <span>武器</span>
+        </div>
+        <!-- 新增英雄：猴子 -->
+        <div class="hero-item" onclick="window.location.href='houzi.html'">
+          <img src="images/houzi.jpg" alt="猴子">
+          <span>猴子</span>
+        </div>
+        <!-- 新增英雄：船长 -->
+        <div class="hero-item" onclick="window.location.href='chuanzhang.html'">
+          <img src="images/chuanzhang.jpg" alt="船长">
+          <span>船长</span>
+        </div>
+        <!-- 新增英雄：安妮（注：图片名你写的是chuanzhang.jpg，和船长重复） -->
+        <div class="hero-item" onclick="window.location.href='anni.html'">
+          <img src="images/chuanzhang.jpg" alt="安妮">
+          <span>安妮</span>
         </div>
       </div>
     </div>
@@ -203,21 +221,23 @@
   </div>
 
   <script>
-    // 搜索功能：修复跳转，对应各自英雄页
+    // 搜索功能：新增英雄暂未配置，后续给攻略后补充
     function searchHero() {
       const heroName = document.getElementById('searchInput').value.trim();
       if (heroName === '亚索') {
-        window.location.href = 'yasuo.html'; // 跳亚索页
+        window.location.href = 'yasuo.html';
       } else if (heroName === '盖伦') {
-        window.location.href = 'gailun.html'; // 跳盖伦页
+        window.location.href = 'gailun.html';
       } else if (heroName === '永恩') {
-        window.location.href = 'yongen.html'; // 跳永恩页
+        window.location.href = 'yongen.html';
+      } else if (heroName === '武器' || heroName === '猴子' || heroName === '船长' || heroName === '安妮') {
+        alert('该英雄攻略正在更新中，敬请期待～');
       } else {
         alert('暂未收录该英雄攻略哦～');
       }
     }
 
-    // 弹窗逻辑（无BUG）
+    // 弹窗逻辑
     function openModal() {
       document.getElementById('imageModal').style.display = 'block';
     }
