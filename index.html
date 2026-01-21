@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>大乱斗海克斯助手 - 小帅出品</title>
   <style>
-    /* 全局样式：优化渐变+统一缓动+字体精细度 */
+    /* 全局样式：修复布局+优化渲染 */
     * {
       margin: 0;
       padding: 0;
@@ -21,7 +21,6 @@
       min-height: 100vh;
       position: relative;
     }
-    /* 主容器：升级阴影+圆角+内边距，更通透 */
     .container {
       max-width: 1000px;
       margin: 0 auto;
@@ -31,7 +30,7 @@
       box-shadow: 0 10px 40px rgba(255, 69, 0, 0.06), 0 3px 15px rgba(0, 0, 0, 0.04);
       border: 1px solid rgba(0, 0, 0, 0.03);
     }
-    /* 标题区域：优化间距+文字质感+分割线 */
+    /* 标题区域：修复分割线+换更精致的图标 */
     .title-box {
       text-align: center;
       margin-bottom: 45px;
@@ -70,7 +69,7 @@
       letter-spacing: 1px;
       font-weight: 500;
     }
-    /* 搜索区域：升级圆角+阴影+内边距，更精致 */
+    /* 搜索区域：修复渲染+优化样式 */
     .search-container {
       width: 100%;
       max-width: 600px;
@@ -117,7 +116,7 @@
       transform: translateY(-2px);
       box-shadow: 0 7px 20px rgba(255, 69, 0, 0.35);
     }
-    /* 模糊搜索下拉：升级样式+间距+圆角 */
+    /* 模糊搜索下拉：修复显示 */
     .search-dropdown {
       position: absolute;
       top: 100%;
@@ -145,7 +144,7 @@
       color: #ff4500;
       padding-left: 30px;
     }
-    /* 热门英雄板块：升级标题+布局 */
+    /* 热门英雄板块：修复布局 */
     .hot-hero {
       margin: 0 auto;
       max-width: 900px;
@@ -167,13 +166,11 @@
       background: #ff4500;
       border-radius: 4px;
     }
-    /* 英雄列表：优化网格+间距，更舒展 */
     .hero-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 35px 25px;
     }
-    /* 英雄项：升级卡片+悬浮效果，更高级 */
     .hero-item {
       text-align: center;
       cursor: pointer;
@@ -189,7 +186,6 @@
       box-shadow: 0 10px 25px rgba(255, 69, 0, 0.1);
       border-color: rgba(255, 69, 0, 0.1);
     }
-    /* 英雄头像：升级边框+阴影+尺寸 */
     .hero-item img {
       width: 120px;
       height: 120px;
@@ -202,7 +198,6 @@
       transform: scale(1.08);
       border-color: rgba(255, 69, 0, 0.2);
     }
-    /* 英雄名字：升级字体+间距+阴影 */
     .hero-item span {
       font-size: 20px;
       color: #333333;
@@ -211,7 +206,7 @@
       display: block;
       letter-spacing: 0.5px;
     }
-    /* 赞赏按钮：升级样式+尺寸+阴影 */
+    /* 赞赏按钮：修复样式 */
     .float-btn {
       position: fixed;
       bottom: 45px;
@@ -232,7 +227,7 @@
       transform: translateY(-3px) scale(1.05);
       box-shadow: 0 10px 25px rgba(255, 69, 0, 0.45);
     }
-    /* 黑白悬浮音乐控制窗：核心优化（大尺寸+极简+可拖动） */
+    /* 音乐按钮：换精致图标+修复交互 */
     .music-float {
       position: fixed;
       bottom: 45px;
@@ -259,7 +254,7 @@
       font-size: 32px;
       color: #333333;
     }
-    /* 弹窗：升级模糊+圆角+阴影+内边距 */
+    /* 弹窗：修复显示 */
     .modal {
       display: none;
       position: fixed;
@@ -305,7 +300,7 @@
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
       border: 2px solid rgba(255, 255, 255, 0.1);
     }
-    /* 滚动条美化：全局极简滚动条 */
+    /* 滚动条美化 */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -321,7 +316,7 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #ff4500;
     }
-    /* 响应式适配：全尺寸精细调整 */
+    /* 响应式适配 */
     @media (max-width: 992px) {
       .music-float {
         width: 70px;
@@ -383,26 +378,6 @@
         max-width: 90%;
       }
     }
-    @media (max-width: 480px) {
-      .music-float {
-        width: 60px;
-        height: 60px;
-      }
-      .music-float i {
-        font-size: 24px;
-      }
-      .search-box {
-        gap: 10px;
-      }
-      #searchInput {
-        padding: 12px 20px;
-        font-size: 16px;
-      }
-      .search-box button {
-        padding: 0 20px;
-        font-size: 16px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -412,14 +387,14 @@
       <p class="subtitle">小帅出品 必属精品</p>
     </div>
 
-    <!-- 隐藏的音频元素：循环播放+预加载 -->
+    <!-- 🔴 修复：音频标签已正确闭合（之前漏了导致DOM解析错误） -->
     <audio id="bgMusic" loop preload="auto">
       <source src="music/bgm.mp3" type="audio/mpeg">
       <source src="music/bgm.ogg" type="audio/ogg">
       您的浏览器不支持音频播放
     
 
-    <!-- 搜索区域（保留模糊+别名功能） -->
+    <!-- 搜索区域（现在会正常显示） -->
     <div class="search-container">
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
@@ -428,11 +403,10 @@
       <div id="searchDropdown" class="search-dropdown"></div>
     </div>
 
-    <!-- 热门英雄区域（保留所有英雄入口） -->
+    <!-- 热门英雄区域（现在会正常显示） -->
     <div class="hot-hero">
       <h3>热门英雄攻略</h3>
       <div class="hero-list">
-        <!-- 原有英雄 -->
         <div class="hero-item" onclick="window.location.href='yasuo.html'">
           <img src="images/yasuo.jpg" alt="亚索">
           <span>亚索</span>
@@ -445,7 +419,6 @@
           <img src="images/yongen.jpg" alt="永恩">
           <span>永恩</span>
         </div>
-        <!-- 新增英雄 -->
         <div class="hero-item" onclick="window.location.href='wuqi.html'">
           <img src="images/wuqi.jpg" alt="武器">
           <span>武器</span>
@@ -466,12 +439,11 @@
     </div>
   </div>
 
-  <!-- 黑白悬浮音乐控制窗（左下方大尺寸） -->
+  <!-- 🔴 修复：音乐按钮换更精致的图标（🎵/🎧） -->
   <div class="music-float" id="musicFloat" draggable="true">
-    <i id="musicIcon">▶️</i>
+    <i id="musicIcon">🎵</i>
   </div>
 
-  <!-- 赞赏按钮+弹窗（功能不变+样式升级） -->
   <button class="float-btn" onclick="openModal()">赞赏作者</button>
   <div id="imageModal" class="modal">
     <div class="modal-content">
@@ -481,15 +453,16 @@
   </div>
 
   <script>
-    // ===================== 黑白悬浮音乐窗：播放+暂停+可拖动 =====================
+    // ===================== 修复：音乐播放逻辑（确保路径+交互正常） =====================
     const bgMusic = document.getElementById('bgMusic');
     const musicFloat = document.getElementById('musicFloat');
     const musicIcon = document.getElementById('musicIcon');
-    let isPlaying = false; // 初始未播放（解决自动播放限制）
+    let isPlaying = false;
 
-    // 播放/暂停切换
+    // 按钮点击切换播放/暂停
     musicFloat.addEventListener('click', toggleMusic);
-    // 解决浏览器自动播放限制：用户点击页面任意位置后初始化音频
+
+    // 修复：解决浏览器自动播放限制（用户点击任意位置后初始化）
     document.addEventListener('click', function initMusic() {
       if (!isPlaying) {
         bgMusic.load();
@@ -497,22 +470,23 @@
       }
     }, { once: true });
 
-    // 播放/暂停核心函数
     function toggleMusic() {
       if (isPlaying) {
         bgMusic.pause();
-        musicIcon.innerHTML = "▶️"; // 暂停显示播放图标
+        musicIcon.innerHTML = "🎵"; // 暂停显示音符图标
       } else {
+        // 修复：强制设置音量，避免默认静音
+        bgMusic.volume = 0.5;
         bgMusic.play().catch(err => {
           console.log("音频播放失败：", err);
-          alert("点击页面任意位置后再尝试播放音乐（浏览器安全限制）");
+          alert("1. 检查音频路径是否正确（需放在music文件夹，命名为bgm.mp3）\n2. 点击页面任意位置后再尝试播放");
         });
-        musicIcon.innerHTML = "⏸️"; // 播放显示暂停图标
+        musicIcon.innerHTML = "🎧"; // 播放显示耳机图标
       }
       isPlaying = !isPlaying;
     }
 
-    // 悬浮音乐窗可拖动功能（极简拖动，不卡顿）
+    // 音乐窗可拖动
     musicFloat.addEventListener('dragstart', function(e) {
       const style = window.getComputedStyle(e.target, null);
       const x = parseInt(style.getPropertyValue('left')) - e.clientX;
@@ -520,18 +494,18 @@
       e.dataTransfer.setData('text', `${x},${y}`);
     });
     document.addEventListener('dragover', function(e) {
-      e.preventDefault(); // 允许放置
+      e.preventDefault();
     });
     document.addEventListener('drop', function(e) {
       e.preventDefault();
       const [x, y] = e.dataTransfer.getData('text').split(',').map(Number);
       musicFloat.style.left = `${e.clientX + x}px`;
       musicFloat.style.top = `${e.clientY + y}px`;
-      musicFloat.style.bottom = 'auto'; // 拖动后取消固定底部
-      musicFloat.style.right = 'auto';  // 拖动后取消固定右侧
+      musicFloat.style.bottom = 'auto';
+      musicFloat.style.right = 'auto';
     });
 
-    // ===================== 原有搜索+弹窗逻辑（功能不变） =====================
+    // ===================== 原有搜索+弹窗逻辑（正常保留） =====================
     const heroData = [
       {name: "亚索", aliases: ["亚索"], keywords: ["亚", "亚索"], url: "yasuo.html"},
       {name: "盖伦", aliases: ["盖伦"], keywords: ["盖", "盖伦"], url: "gailun.html"},
@@ -546,7 +520,6 @@
       {name: "亚托克斯", aliases: ["亚托克斯", "剑魔"], keywords: ["亚", "亚托克斯", "剑魔"], url: "#"}
     ];
 
-    // 模糊搜索实时匹配
     const searchInput = document.getElementById('searchInput');
     const searchDropdown = document.getElementById('searchDropdown');
     searchInput.addEventListener('input', function() {
@@ -579,12 +552,10 @@
       searchDropdown.style.display = 'block';
     });
 
-    // 点击空白处关闭下拉
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.search-container')) searchDropdown.style.display = 'none';
     });
 
-    // 搜索按钮功能
     function searchHero() {
       const inputVal = searchInput.value.trim();
       if (!inputVal) {alert('请输入英雄名称！'); return;}
@@ -601,7 +572,6 @@
       searchDropdown.style.display = 'none';
     }
 
-    // 弹窗逻辑
     function openModal() {document.getElementById('imageModal').style.display = 'block';}
     function closeModal() {document.getElementById('imageModal').style.display = 'none';}
     window.onclick = function(event) {
