@@ -5,128 +5,222 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>大乱斗海克斯助手 - 小帅出品</title>
   <style>
-    /* 全局样式 */
+    /* 全局样式：渐变背景+统一缓动特效 */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 微软雅黑, "黑体", sans-serif;
+      transition: all 0.3s ease-in-out;
     }
     body {
-      background: #f5f5f5;
+      background: linear-gradient(120deg, #fff8f5, #fff0eb);
       padding: 20px;
+      min-height: 100vh;
     }
+    /* 主容器：立体卡片+细腻阴影 */
     .container {
-      max-width: 900px;
+      max-width: 950px;
       margin: 0 auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(255, 69, 0, 0.08), 0 2px 10px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(255, 69, 0, 0.1);
     }
-    /* 标题区域 */
+    /* 标题区域：渐变文字+装饰图标+层次感 */
     .title-box {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 20px;
+    }
+    .title-box::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff4500, #ff9500);
+      border-radius: 2px;
     }
     h1 {
-      color: #ff4500;
-      margin-bottom: 10px;
-      font-size: 28px;
-      text-shadow: 0 0 8px #ff450080;
+      font-size: 36px;
+      background: linear-gradient(90deg, #ff4500, #ff7849);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .title-box i {
+      font-size: 24px;
+      color: #ff7849;
+      margin: 0 10px;
     }
     .subtitle {
-      color: #666;
+      color: #666666;
       font-style: italic;
-      font-size: 16px;
+      font-size: 18px;
+      letter-spacing: 1px;
     }
-    /* 搜索框 */
-    .search-box {
+    /* 搜索区域：优化布局+立体质感+渐变按钮 */
+    .search-container {
       width: 100%;
-      max-width: 500px;
-      margin: 0 auto 30px;
+      max-width: 550px;
+      margin: 0 auto 50px;
+      position: relative;
+    }
+    .search-box {
       display: flex;
-      gap: 10px;
+      gap: 12px;
     }
     #searchInput {
       flex: 1;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 25px;
+      padding: 14px 20px;
+      border: 1px solid rgba(255, 69, 0, 0.15);
+      border-radius: 30px;
       font-size: 16px;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(255, 69, 0, 0.05) inset;
     }
     #searchInput:focus {
       border-color: #ff4500;
-      box-shadow: 0 0 5px #ff450050;
+      box-shadow: 0 0 8px rgba(255, 69, 0, 0.2), 0 2px 8px rgba(255, 69, 0, 0.05) inset;
+      outline: none;
+      transform: translateY(-2px);
     }
     .search-box button {
-      padding: 0 20px;
-      background: #ff4500;
+      padding: 0 25px;
+      background: linear-gradient(90deg, #ff4500, #ff6347);
       color: white;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       cursor: pointer;
       font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(255, 69, 0, 0.2);
     }
     .search-box button:hover {
-      background: #ff6347;
+      background: linear-gradient(90deg, #ff3300, #ff4500);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 69, 0, 0.3);
     }
-    /* 热门英雄 */
+    /* 模糊搜索下拉：优化样式+hover特效 */
+    .search-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 8px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      max-height: 220px;
+      overflow-y: auto;
+      z-index: 999;
+      display: none;
+      border: 1px solid rgba(255, 69, 0, 0.1);
+    }
+    .search-dropdown-item {
+      padding: 12px 20px;
+      cursor: pointer;
+      color: #333333;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .search-dropdown-item:last-child {
+      border-bottom: none;
+    }
+    .search-dropdown-item:hover {
+      background: linear-gradient(90deg, #fff8f5, #fff0eb);
+      color: #ff4500;
+      padding-left: 25px;
+    }
+    /* 热门英雄板块：标题装饰+布局优化 */
     .hot-hero {
-      margin: 40px 0;
+      margin: 0 auto;
+      max-width: 850px;
     }
     .hot-hero h3 {
-      font-size: 18px;
-      color: #333;
-      margin-bottom: 20px;
-      border-left: 4px solid #ff4500;
-      padding-left: 10px;
+      font-size: 20px;
+      color: #333333;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
     }
+    .hot-hero h3::before {
+      content: "";
+      width: 6px;
+      height: 20px;
+      background: linear-gradient(180deg, #ff4500, #ff9500);
+      border-radius: 3px;
+    }
+    /* 英雄列表：网格优化+卡片式英雄项 */
     .hero-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 30px 20px;
     }
     .hero-item {
       text-align: center;
       cursor: pointer;
-      transition: transform 0.3s;
+      position: relative;
+      padding: 10px;
+      border-radius: 12px;
+    }
+    /* 英雄头像：渐变边框+立体阴影+hover动效（缩放+旋转+阴影） */
+    .hero-item img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 3px solid transparent;
+      background: linear-gradient(#fff, #fff) padding-box,
+                  linear-gradient(90deg, #ff4500, #ff9500) border-box;
+      box-shadow: 0 6px 15px rgba(255, 69, 0, 0.15);
+    }
+    .hero-item:hover img {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 10px 20px rgba(255, 69, 0, 0.25);
     }
     .hero-item:hover {
-      transform: scale(1.05);
+      background: linear-gradient(120deg, #fff8f5, #fff0eb);
+      transform: translateY(-5px);
     }
-    .hero-item img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-bottom: 8px;
-      border: 2px solid #ff450030;
-    }
-    /* 英雄名字：18px黑色加粗，无描边 */
+    /* 英雄名字：加粗+文字阴影+字号优化 */
     .hero-item span {
-      font-size: 18px;
-      color: #000;
+      font-size: 19px;
+      color: #333333;
       font-weight: bold;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
       display: block;
-      transform: rotate(0);
     }
-    /* 赞赏按钮 */
+    /* 赞赏按钮：悬浮固定+渐变+立体阴影+hover动效 */
     .float-btn {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
-      padding: 12px 18px;
-      background: #ff4500;
+      bottom: 40px;
+      right: 40px;
+      padding: 14px 22px;
+      background: linear-gradient(90deg, #ff4500, #ff6347);
       color: white;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 17px;
+      font-weight: bold;
+      box-shadow: 0 6px 15px rgba(255, 69, 0, 0.3);
+      z-index: 999;
     }
     .float-btn:hover {
-      background: #ff6347;
+      background: linear-gradient(90deg, #ff3300, #ff4500);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 69, 0, 0.4);
     }
-    /* 弹窗 */
+    /* 弹窗：优化圆角+阴影+图片质感 */
     .modal {
       display: none;
       position: fixed;
@@ -135,44 +229,87 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
     }
     .modal-content {
-      margin: 5% auto;
+      margin: 8% auto;
       text-align: center;
       position: relative;
+      max-width: 650px;
+      padding: 10px;
     }
     .close-btn {
       position: absolute;
-      top: -40px;
+      top: -50px;
       right: 0;
       color: white;
-      font-size: 36px;
+      font-size: 40px;
       cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .close-btn:hover {
       color: #ff4500;
+      background: rgba(255, 255, 255, 0.1);
     }
     .modal-content img {
       width: 100%;
       max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    /* 响应式适配：手机端自动调整 */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .container {
+        padding: 30px 20px;
+      }
+      .hero-list {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 20px 15px;
+      }
+      .hero-item img {
+        width: 90px;
+        height: 90px;
+      }
+      .float-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+      .search-container {
+        max-width: 400px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="title-box">
-      <h1>大乱斗海克斯助手</h1>
-      <p class="subtitle">《小帅出品必属精品》</p>
+      <h1><i>⚔️</i>大乱斗海克斯助手<i>⚔️</i></h1>
+      <p class="subtitle">小帅出品 必属精品</p>
     </div>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、永恩）">
-      <button onclick="searchHero()">搜索</button>
+    <!-- 搜索区域（保留模糊+别名功能） -->
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
+        <button onclick="searchHero()">搜索</button>
+      </div>
+      <div id="searchDropdown" class="search-dropdown"></div>
     </div>
 
+    <!-- 热门英雄区域（保留所有英雄入口） -->
     <div class="hot-hero">
-      <h3>热门英雄</h3>
+      <h3>热门英雄攻略</h3>
       <div class="hero-list">
         <!-- 原有英雄 -->
         <div class="hero-item" onclick="window.location.href='yasuo.html'">
@@ -187,22 +324,19 @@
           <img src="images/yongen.jpg" alt="永恩">
           <span>永恩</span>
         </div>
-        <!-- 新增英雄：武器 -->
+        <!-- 新增英雄 -->
         <div class="hero-item" onclick="window.location.href='wuqi.html'">
           <img src="images/wuqi.jpg" alt="武器">
           <span>武器</span>
         </div>
-        <!-- 新增英雄：猴子 -->
         <div class="hero-item" onclick="window.location.href='houzi.html'">
           <img src="images/houzi.jpg" alt="猴子">
           <span>猴子</span>
         </div>
-        <!-- 新增英雄：船长 -->
         <div class="hero-item" onclick="window.location.href='chuanzhang.html'">
           <img src="images/chuanzhang.jpg" alt="船长">
           <span>船长</span>
         </div>
-        <!-- 新增英雄：安妮（已改图片为anni.jpg） -->
         <div class="hero-item" onclick="window.location.href='anni.html'">
           <img src="images/anni.jpg" alt="安妮">
           <span>安妮</span>
@@ -211,8 +345,8 @@
     </div>
   </div>
 
+  <!-- 赞赏按钮+弹窗（功能不变） -->
   <button class="float-btn" onclick="openModal()">赞赏作者</button>
-
   <div id="imageModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -220,35 +354,83 @@
     </div>
   </div>
 
+  <!-- 原有JS功能：模糊搜索+别名跳转+弹窗（完全保留） -->
   <script>
-    // 搜索功能：新增英雄暂未配置，后续给攻略后补充
+    const heroData = [
+      {name: "亚索", aliases: ["亚索"], keywords: ["亚", "亚索"], url: "yasuo.html"},
+      {name: "盖伦", aliases: ["盖伦"], keywords: ["盖", "盖伦"], url: "gailun.html"},
+      {name: "永恩", aliases: ["永恩"], keywords: ["永", "永恩"], url: "yongen.html"},
+      {name: "猴子", aliases: ["猴子", "齐天大圣", "孙悟空"], keywords: ["猴", "猴子", "齐天大圣", "孙悟空"], url: "houzi.html"},
+      {name: "船长", aliases: ["船长", "海洋之灾", "普朗克"], keywords: ["船", "船长", "海洋之灾", "普朗克"], url: "chuanzhang.html"},
+      {name: "武器", aliases: ["武器", "武器大师", "贾克斯"], keywords: ["武", "武器", "贾克斯", "武器大师"], url: "wuqi.html"},
+      {name: "安妮", aliases: ["安妮"], keywords: ["安", "安妮"], url: "anni.html"},
+      {name: "虚空恐惧", aliases: ["虚空恐惧", "科加斯"], keywords: ["虚空", "虚空恐惧", "科加斯"], url: "#"},
+      {name: "虚空行者", aliases: ["虚空行者", "卡萨丁"], keywords: ["虚空", "虚空行者", "卡萨丁"], url: "#"},
+      {name: "虚空先知", aliases: ["虚空先知", "玛尔扎哈"], keywords: ["虚空", "虚空先知", "玛尔扎哈"], url: "#"},
+      {name: "亚托克斯", aliases: ["亚托克斯", "剑魔"], keywords: ["亚", "亚托克斯", "剑魔"], url: "#"}
+    ];
+
+    // 模糊搜索实时匹配
+    const searchInput = document.getElementById('searchInput');
+    const searchDropdown = document.getElementById('searchDropdown');
+    searchInput.addEventListener('input', function() {
+      const inputVal = this.value.trim().toLowerCase();
+      searchDropdown.innerHTML = '';
+      if (inputVal.length === 0) {
+        searchDropdown.style.display = 'none';
+        return;
+      }
+      const matchedHeroes = heroData.filter(hero => {
+        const allKeywords = [...hero.aliases, ...hero.keywords, hero.name].map(item => item.toLowerCase());
+        return allKeywords.some(item => item.includes(inputVal));
+      });
+      if (matchedHeroes.length === 0) {
+        searchDropdown.innerHTML = '<div class="search-dropdown-item">暂无匹配英雄</div>';
+        searchDropdown.style.display = 'block';
+        return;
+      }
+      matchedHeroes.forEach(hero => {
+        const item = document.createElement('div');
+        item.className = 'search-dropdown-item';
+        item.textContent = hero.name;
+        item.onclick = function() {
+          hero.url !== '#' ? window.location.href = hero.url : alert(`暂未收录${hero.name}的攻略哦～`);
+          searchDropdown.style.display = 'none';
+          searchInput.value = '';
+        };
+        searchDropdown.appendChild(item);
+      });
+      searchDropdown.style.display = 'block';
+    });
+
+    // 点击空白处关闭下拉
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.search-container')) searchDropdown.style.display = 'none';
+    });
+
+    // 搜索按钮功能
     function searchHero() {
-      const heroName = document.getElementById('searchInput').value.trim();
-      if (heroName === '亚索') {
-        window.location.href = 'yasuo.html';
-      } else if (heroName === '盖伦') {
-        window.location.href = 'gailun.html';
-      } else if (heroName === '永恩') {
-        window.location.href = 'yongen.html';
-      } else if (heroName === '武器' || heroName === '猴子' || heroName === '船长' || heroName === '安妮') {
-        alert('该英雄攻略正在更新中，敬请期待～');
+      const inputVal = searchInput.value.trim();
+      if (!inputVal) {alert('请输入英雄名称！'); return;}
+      const targetHero = heroData.find(hero => {
+        return hero.aliases.some(alias => alias.toLowerCase() === inputVal.toLowerCase()) || 
+               hero.name.toLowerCase() === inputVal.toLowerCase();
+      });
+      if (targetHero) {
+        targetHero.url !== '#' ? window.location.href = targetHero.url : alert(`暂未收录${targetHero.name}的攻略哦～`);
       } else {
         alert('暂未收录该英雄攻略哦～');
       }
+      searchInput.value = '';
+      searchDropdown.style.display = 'none';
     }
 
     // 弹窗逻辑
-    function openModal() {
-      document.getElementById('imageModal').style.display = 'block';
-    }
-    function closeModal() {
-      document.getElementById('imageModal').style.display = 'none';
-    }
+    function openModal() {document.getElementById('imageModal').style.display = 'block';}
+    function closeModal() {document.getElementById('imageModal').style.display = 'none';}
     window.onclick = function(event) {
       const modal = document.getElementById('imageModal');
-      if (event.target === modal) {
-        closeModal();
-      }
+      if (event.target === modal) closeModal();
     }
   </script>
 </body>
