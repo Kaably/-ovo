@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 微软雅黑, sans-serif;
+      font-family: 微软雅黑, "黑体", sans-serif;
     }
     body {
       background: #f5f5f5;
@@ -32,10 +32,13 @@
     h1 {
       color: #ff4500;
       margin-bottom: 10px;
+      font-size: 28px;
+      text-shadow: 0 0 8px #ff450080;
     }
     .subtitle {
       color: #666;
       font-style: italic;
+      font-size: 16px;
     }
     /* 搜索框 */
     .search-box {
@@ -55,6 +58,7 @@
     }
     #searchInput:focus {
       border-color: #ff4500;
+      box-shadow: 0 0 5px #ff450050;
     }
     .search-box button {
       padding: 0 20px;
@@ -64,6 +68,10 @@
       border-radius: 25px;
       cursor: pointer;
       font-size: 16px;
+      transition: background 0.3s;
+    }
+    .search-box button:hover {
+      background: #ff6347;
     }
     /* 热门英雄 */
     .hot-hero {
@@ -94,11 +102,16 @@
       height: 100px;
       border-radius: 50%;
       margin-bottom: 8px;
-      border: 2px solid #eee;
+      border: 2px solid #ff450030;
     }
+    /* 英雄名字：炫酷字体（橙色+加粗+发光阴影） */
     .hero-item span {
-      font-size: 14px;
-      color: #555;
+      font-size: 16px;
+      color: #ff4500;
+      font-weight: bold;
+      text-shadow: 0 0 6px #ff4500; /* 发光炫酷效果 */
+      display: block; /* 强制横排，修复竖排问题 */
+      transform: rotate(0); /* 取消旋转 */
     }
     /* 右下角赞赏按钮 */
     .float-btn {
@@ -167,7 +180,7 @@
       <button onclick="searchHero()">搜索</button>
     </div>
 
-    <!-- 热门英雄（去掉奶妈、保留盖伦、新增永恩） -->
+    <!-- 热门英雄：亚索+盖伦+永恩（去掉奶妈） -->
     <div class="hot-hero">
       <h3>热门英雄</h3>
       <div class="hero-list">
@@ -176,12 +189,12 @@
           <img src="images/yasuo.jpg" alt="亚索">
           <span>亚索</span>
         </div>
-        <!-- 盖伦（保留） -->
+        <!-- 盖伦 -->
         <div class="hero-item" onclick="window.location.href='gailun.html'">
           <img src="images/gailun.jpg" alt="盖伦">
           <span>盖伦</span>
         </div>
-        <!-- 永恩（新增） -->
+        <!-- 永恩 -->
         <div class="hero-item" onclick="window.location.href='yongen.html'">
           <img src="images/yongen.jpg" alt="永恩">
           <span>永恩</span>
@@ -197,13 +210,13 @@
   <div id="imageModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">&times;</span>
-      <img src="images/彩蛋图片.jpg" alt="赞赏作者" style="width:100%;max-width:600px">
+      <img src="images/彩蛋图片.jpg" alt="赞赏作者">
     </div>
   </div>
 
-  <!-- 弹窗逻辑 -->
+  <!-- 功能脚本 -->
   <script>
-    // 搜索英雄（简单版，可后续扩展）
+    // 搜索英雄功能
     function searchHero() {
       const heroName = document.getElementById('searchInput').value.trim();
       if (heroName === '亚索') {
@@ -217,7 +230,7 @@
       }
     }
 
-    // 弹窗逻辑
+    // 赞赏弹窗逻辑
     function openModal() {
       document.getElementById('imageModal').style.display = 'block';
     }
