@@ -24,7 +24,7 @@
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    /* 标题区域（橙色，不变） */
+    /* 标题区域 */
     .title-box {
       text-align: center;
       margin-bottom: 30px;
@@ -54,7 +54,6 @@
       border: 1px solid #ddd;
       border-radius: 25px;
       font-size: 16px;
-      outline: none;
     }
     #searchInput:focus {
       border-color: #ff4500;
@@ -68,7 +67,6 @@
       border-radius: 25px;
       cursor: pointer;
       font-size: 16px;
-      transition: background 0.3s;
     }
     .search-box button:hover {
       background: #ff6347;
@@ -104,36 +102,33 @@
       margin-bottom: 8px;
       border: 2px solid #ff450030;
     }
-    /* 英雄名字：新风格（深蓝色+白色描边+哑光阴影，和标题区分） */
+    /* 英雄名字：黑色+红边（核心修改） */
     .hero-item span {
       font-size: 16px;
-      color: #2E86AB; /* 深海蓝，和橙色标题区分 */
+      color: #000; /* 黑色字体 */
       font-weight: bold;
-      text-shadow: 1px 1px 0 #fff, 2px 2px 3px #0003; /* 白色描边+哑光阴影，更高级 */
-      -webkit-text-stroke: 0.5px #fff; /* 白色细描边，炫酷不刺眼 */
+      -webkit-text-stroke: 1px #ff0000; /* 红色描边 */
+      text-shadow: 0 0 2px #ff000080; /* 红色微光 */
       display: block;
       transform: rotate(0);
     }
-    /* 右下角赞赏按钮 */
+    /* 赞赏按钮 */
     .float-btn {
       position: fixed;
       bottom: 30px;
       right: 30px;
       padding: 12px 18px;
-      background-color: #ff4500;
+      background: #ff4500;
       color: white;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       font-size: 16px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      z-index: 999;
-      transition: background-color 0.3s;
     }
     .float-btn:hover {
-      background-color: #ff6347;
+      background: #ff6347;
     }
-    /* 图片弹窗 */
+    /* 弹窗 */
     .modal {
       display: none;
       position: fixed;
@@ -142,7 +137,7 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.8);
     }
     .modal-content {
       margin: 5% auto;
@@ -155,7 +150,6 @@
       right: 0;
       color: white;
       font-size: 36px;
-      font-weight: bold;
       cursor: pointer;
     }
     .close-btn:hover {
@@ -169,29 +163,26 @@
 </head>
 <body>
   <div class="container">
-    <!-- 标题区域 -->
     <div class="title-box">
       <h1>大乱斗海克斯助手</h1>
       <p class="subtitle">《小帅出品必属精品》</p>
     </div>
 
-    <!-- 搜索框 -->
     <div class="search-box">
       <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、永恩）">
       <button onclick="searchHero()">搜索</button>
     </div>
 
-    <!-- 热门英雄：亚索+盖伦+永恩（去掉奶妈） -->
     <div class="hot-hero">
       <h3>热门英雄</h3>
       <div class="hero-list">
-        <!-- 亚索 -->
-        <div class="hero-item" onclick="window.location.href='yasuo.html'">
+        <!-- 亚索（先临时跳转到永恩页，创建yasuo.html后改回） -->
+        <div class="hero-item" onclick="window.location.href='yongen.html'">
           <img src="images/yasuo.jpg" alt="亚索">
           <span>亚索</span>
         </div>
-        <!-- 盖伦 -->
-        <div class="hero-item" onclick="window.location.href='gailun.html'">
+        <!-- 盖伦（先临时跳转到永恩页，创建gailun.html后改回） -->
+        <div class="hero-item" onclick="window.location.href='yongen.html'">
           <img src="images/gailun.jpg" alt="盖伦">
           <span>盖伦</span>
         </div>
@@ -204,10 +195,8 @@
     </div>
   </div>
 
-  <!-- 右下角赞赏作者按钮 -->
   <button class="float-btn" onclick="openModal()">赞赏作者</button>
 
-  <!-- 图片弹窗 -->
   <div id="imageModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -215,30 +204,23 @@
     </div>
   </div>
 
-  <!-- 功能脚本 -->
   <script>
-    // 搜索英雄功能
+    // 搜索功能（临时统一跳永恩页，创建文件后改）
     function searchHero() {
       const heroName = document.getElementById('searchInput').value.trim();
-      if (heroName === '亚索') {
-        window.location.href = 'yasuo.html';
-      } else if (heroName === '盖伦') {
-        window.location.href = 'gailun.html';
-      } else if (heroName === '永恩') {
-        window.location.href = 'yongen.html';
+      if (heroName) {
+        window.location.href = 'yongen.html'; // 临时跳转，创建文件后细分
       } else {
-        alert('暂未收录该英雄攻略哦～');
+        alert('请输入英雄名称！');
       }
     }
 
-    // 赞赏弹窗逻辑
     function openModal() {
       document.getElementById('imageModal').style.display = 'block';
     }
     function closeModal() {
       document.getElementById('imageModal').style.display = 'none';
     }
-    // 点击弹窗外部关闭
     window.onclick = function(event) {
       const modal = document.getElementById('imageModal');
       if (event.target === modal) {
