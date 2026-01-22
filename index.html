@@ -181,7 +181,7 @@
     </div>
 
     <script>
-        // 模糊搜索功能（包含所有原有+新增英雄，支持本名+别名）
+        // 模糊搜索功能（输入关键字片段即可匹配，比如"火"→火男、"盖"→盖伦）
         function searchHero() {
             const input = document.getElementById('searchInput').value.trim().toLowerCase();
             if (!input) {
@@ -205,13 +205,23 @@
                 { names: ['岩雀', '塔莉垭'], page: 'yanque.html' },
                 { names: ['泽拉斯', '远古巫灵'], page: 'zelasi.html' }
             ];
-            const results = heroData.filter(hero => hero.names.some(name => name.toLowerCase().includes(input)));
-            if (results.length === 1) window.location.href = results[0].page;
-            else if (results.length > 1) alert(`找到多个匹配英雄：${results.map(hero => hero.names[0]).join('、')}\n请输入更精确的名称`);
-            else alert('暂未收录该英雄攻略哦~');
+            // 核心模糊匹配：只要关键字是英雄名/别名的一部分，就匹配成功
+            const results = heroData.filter(hero => 
+                hero.names.some(name => name.toLowerCase().includes(input))
+            );
+            if (results.length === 1) {
+                window.location.href = results[0].page; // 匹配1个直接跳转
+            } else if (results.length > 1) {
+                // 匹配多个时提示所有结果
+                alert(`找到多个匹配英雄：${results.map(hero => hero.names[0]).join('、')}\n请输入更精确的名称`);
+            } else {
+                alert('暂未收录该英雄攻略哦~');
+            }
         }
-        // 回车键触发搜索
-        document.getElementById('searchInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') searchHero(); });
+        // 回车键触发搜索（保留原有功能）
+        document.getElementById('searchInput').addEventListener('keypress', (e) => { 
+            if (e.key === 'Enter') searchHero(); 
+        });
     </script>
 </body>
 </html>
