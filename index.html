@@ -43,6 +43,7 @@
             width: 100%;
             max-width: 600px;
             margin: 0 auto 50px;
+            position: relative; /* 新增：用于下拉列表定位 */
         }
         .search-box {
             display: flex;
@@ -63,6 +64,31 @@
             border-radius: 30px;
             cursor: pointer;
             font-weight: bold;
+        }
+        /* 新增：下拉联想列表样式 */
+        #searchSuggest {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 5px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 999;
+            display: none; /* 默认隐藏 */
+        }
+        .suggest-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+        }
+        .suggest-item:hover {
+            background: #f5f5f5;
+            border-radius: 10px;
         }
         .hot-hero {
             margin: 0 auto;
@@ -113,9 +139,11 @@
 
         <div class="search-container">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、齐天大圣）">
+                <input type="text" id="searchInput" placeholder="输入英雄名称搜索（如亚索、虚空）">
                 <button onclick="searchHero()">搜索</button>
             </div>
+            <!-- 新增：下拉联想列表容器 -->
+            <div id="searchSuggest"></div>
         </div>
 
         <div class="hot-hero">
@@ -176,51 +204,114 @@
                     <img src="images/zelasi.jpg" alt="泽拉斯">
                     <span>泽拉斯</span>
                 </div>
+
+                <!-- 新增虚空系英雄示例（你可根据实际页面补充） -->
+                <div class="hero-item" onclick="window.location.href='xukongxingzhe.html'">
+                    <img src="images/xukongxingzhe.jpg" alt="虚空行者">
+                    <span>虚空行者</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='xukongzhiyan.html'">
+                    <img src="images/xukongzhiyan.jpg" alt="虚空之眼">
+                    <span>虚空之眼</span>
+                </div>
+                <div class="hero-item" onclick="window.location.href='xukongzhinv.html'">
+                    <img src="images/xukongzhinv.jpg" alt="虚空之女">
+                    <span>虚空之女</span>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 模糊搜索功能（输入关键字片段即可匹配，比如"火"→火男、"盖"→盖伦）
+        // 英雄数据（包含所有需要匹配的英雄，可自行扩展）
+        const heroData = [
+            // 原有英雄
+            { name: '亚索', alias: ['疾风剑豪'], page: 'yasuo.html' },
+            { name: '盖伦', alias: ['德玛西亚之力'], page: 'gailun.html' },
+            { name: '永恩', alias: ['封魔剑魂'], page: 'yongen.html' },
+            { name: '武器大师', alias: ['武器', '贾克斯'], page: 'wuqi.html' },
+            { name: '齐天大圣', alias: ['猴子', '孙悟空'], page: 'houzi.html' },
+            { name: '海洋之灾', alias: ['船长', '普朗克'], page: 'chuanzhang.html' },
+            { name: '安妮', alias: ['黑暗之女'], page: 'anni.html' },
+            { name: '冰霜女巫', alias: ['冰女', '丽桑卓'], page: 'bingnv.html' },
+            { name: '复仇焰魂', alias: ['火男', '布兰德'], page: 'huonan.html' },
+            { name: '卡牌大师', alias: ['卡牌', '崔斯特'], page: 'kapai.html' },
+            { name: '含羞蓓蕾', alias: ['莉莉娅'], page: 'liliya.html' },
+            { name: '岩雀', alias: ['塔莉垭'], page: 'yanque.html' },
+            { name: '远古巫灵', alias: ['泽拉斯'], page: 'zelasi.html' },
+            // 虚空系英雄（示例）
+            { name: '虚空行者', alias: ['卡萨丁'], page: 'xukongxingzhe.html' },
+            { name: '虚空之眼', alias: ['维克兹'], page: 'xukongzhiyan.html' },
+            { name: '虚空之女', alias: ['卡莎'], page: 'xukongzhinv.html' }
+        ];
+
+        // 1. 实时下拉联想功能
+        const searchInput = document.getElementById('searchInput');
+        const searchSuggest = document.getElementById('searchSuggest');
+
+        // 监听输入框实时输入
+        searchInput.addEventListener('input', function() {
+            const inputVal = this.value.trim().toLowerCase();
+            searchSuggest.innerHTML = ''; // 清空原有联想结果
+            searchSuggest.style.display = 'none'; // 默认隐藏
+
+            if (!inputVal) return; // 输入为空则不显示
+
+            // 模糊匹配：英雄名/别名包含输入关键词就匹配
+            const matchHeroes = heroData.filter(hero => {
+                const allNames = [hero.name, ...hero.alias].map(n => n.toLowerCase());
+                return allNames.some(n => n.includes(inputVal));
+            });
+
+            if (matchHeroes.length === 0) return; // 无匹配结果则不显示
+
+            // 生成下拉联想项
+            matchHeroes.forEach(hero => {
+                const item = document.createElement('div');
+                item.className = 'suggest-item';
+                item.textContent = hero.name; // 显示英雄全称
+                // 点击联想项跳转对应页面
+                item.onclick = function() {
+                    window.location.href = hero.page;
+                };
+                searchSuggest.appendChild(item);
+            });
+
+            searchSuggest.style.display = 'block'; // 显示下拉列表
+        });
+
+        // 点击页面空白处隐藏下拉列表
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchSuggest.contains(e.target)) {
+                searchSuggest.style.display = 'none';
+            }
+        });
+
+        // 2. 原有搜索按钮/回车搜索功能（保留不变）
         function searchHero() {
-            const input = document.getElementById('searchInput').value.trim().toLowerCase();
+            const input = searchInput.value.trim().toLowerCase();
             if (!input) {
                 alert('请输入英雄名称搜索！');
                 return;
             }
-            const heroData = [
-                // 原有英雄
-                { names: ['亚索', '疾风剑豪'], page: 'yasuo.html' },
-                { names: ['盖伦', '德玛西亚之力'], page: 'gailun.html' },
-                { names: ['永恩', '封魔剑魂'], page: 'yongen.html' },
-                { names: ['武器', '武器大师', '贾克斯'], page: 'wuqi.html' },
-                { names: ['猴子', '齐天大圣', '孙悟空'], page: 'houzi.html' },
-                { names: ['船长', '海洋之灾', '普朗克'], page: 'chuanzhang.html' },
-                { names: ['安妮', '黑暗之女'], page: 'anni.html' },
-                // 新增6位英雄（含别名）
-                { names: ['冰女', '丽桑卓'], page: 'bingnv.html' },
-                { names: ['火男', '复仇焰魂', '布兰德'], page: 'huonan.html' },
-                { names: ['卡牌大师', '崔斯特'], page: 'kapai.html' },
-                { names: ['莉莉娅', '含羞蓓蕾'], page: 'liliya.html' },
-                { names: ['岩雀', '塔莉垭'], page: 'yanque.html' },
-                { names: ['泽拉斯', '远古巫灵'], page: 'zelasi.html' }
-            ];
-            // 核心模糊匹配：只要关键字是英雄名/别名的一部分，就匹配成功
-            const results = heroData.filter(hero => 
-                hero.names.some(name => name.toLowerCase().includes(input))
-            );
-            if (results.length === 1) {
-                window.location.href = results[0].page; // 匹配1个直接跳转
-            } else if (results.length > 1) {
-                // 匹配多个时提示所有结果
-                alert(`找到多个匹配英雄：${results.map(hero => hero.names[0]).join('、')}\n请输入更精确的名称`);
+
+            const matchHeroes = heroData.filter(hero => {
+                const allNames = [hero.name, ...hero.alias].map(n => n.toLowerCase());
+                return allNames.some(n => n.includes(input));
+            });
+
+            if (matchHeroes.length === 1) {
+                window.location.href = matchHeroes[0].page;
+            } else if (matchHeroes.length > 1) {
+                alert(`找到多个匹配英雄：${matchHeroes.map(h => h.name).join('、')}\n请输入更精确的名称`);
             } else {
                 alert('暂未收录该英雄攻略哦~');
             }
         }
-        // 回车键触发搜索（保留原有功能）
-        document.getElementById('searchInput').addEventListener('keypress', (e) => { 
-            if (e.key === 'Enter') searchHero(); 
+
+        // 回车键触发搜索
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchHero();
         });
     </script>
 </body>
